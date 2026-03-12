@@ -1,8 +1,8 @@
 package com.example.home_store.config;
 
 
-import com.example.home_store.model.Product;
 import com.example.home_store.model.enum_model.Category;
+import com.example.home_store.model.Product;
 import com.example.home_store.model.enum_model.Room;
 import com.example.home_store.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
