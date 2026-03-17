@@ -2,13 +2,14 @@ package com.example.home_store.DTO;
 
 
 import com.example.home_store.model.enum_model.ProductType;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
     private Long id;
     private String name;
