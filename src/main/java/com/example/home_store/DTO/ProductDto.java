@@ -13,7 +13,7 @@ public class ProductDto {
     private Long id;
     private String name;
     private String description;
-    private BigDecimal price; // ZMIANA: z double na BigDecimal
+    private BigDecimal price;
     private int quantity;
     private String imageUrl;
     private ProductType productType;
