@@ -1,0 +1,29 @@
+package com.example.home_store.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class OrderItem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Integer quantity;
+
+    private BigDecimal price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Product product;
+}

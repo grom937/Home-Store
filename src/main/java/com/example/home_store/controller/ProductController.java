@@ -3,7 +3,7 @@ package com.example.home_store.controller;
 
 import com.example.home_store.DTO.ProductDto;
 import com.example.home_store.Service.ProductService;
-import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,35 +14,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductService service;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    @PostMapping
+    public ProductDto create(@RequestBody ProductDto dto) {
+        return service.create(dto);
     }
 
     @GetMapping
-    public List<ProductDto> getAllProducts(){
-        return productService.getAllProducts();
+    public List<ProductDto> getAll() {
+        return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public ProductDto getProduct(@PathVariable Long id){
-        return productService.getProductById(id);
-    }
-
-    @PostMapping
-    public ProductDto createProduct(@Valid @RequestBody ProductDto dto){
-        return productService.createProduct(dto);
-    }
-
-    @PutMapping("/{id}")
-    public ProductDto updateProduct(@PathVariable Long id,
-                                    @Valid @RequestBody ProductDto dto){
-        return productService.updateProduct(id, dto);
+    public ProductDto getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id){
-        productService.deleteProduct(id);
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }
