@@ -27,6 +27,12 @@ public class Product {
 
     private int quantity;
 
+    @PrePersist
+    public void prePersist() {
+        if (this.imageUrl == null || this.imageUrl.trim().isEmpty()) {
+            this.imageUrl = "https://via.placeholder.com/400x300?text=Brak+zdjęcia";
+        }
+    }
     private String imageUrl;
 
     @Enumerated(EnumType.STRING)

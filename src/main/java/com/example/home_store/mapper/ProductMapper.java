@@ -23,12 +23,16 @@ public class ProductMapper {
     }
 
     public Product toEntity(ProductDto dto, Category category) {
+        String safeImageUrl = (dto.getImageUrl() == null || dto.getImageUrl().trim().isEmpty())
+                ? "https://via.placeholder.com/400x300?text=Brak+zdjęcia"
+                : dto.getImageUrl();
+
         return Product.builder()
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .price(dto.getPrice())
                 .quantity(dto.getQuantity())
-                .imageUrl(dto.getImageUrl())
+                .imageUrl(safeImageUrl)
                 .productType(dto.getProductType())
                 .category(category)
                 .build();
