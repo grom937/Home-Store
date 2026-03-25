@@ -1,0 +1,22 @@
+<section class="product-list-page">
+  <h1>Lista produktów</h1>
+
+  <p *ngIf="loading" class="info-message">
+    Ładowanie produktów...
+  </p>
+
+  <p *ngIf="error" class="error-message">
+    {{ error }}
+  </p>
+
+  <div *ngIf="!loading && !error && products.length === 0" class="info-message">
+    Brak produktów do wyświetlenia.
+  </div>
+
+  <div *ngIf="!loading && !error && products.length > 0" class="product-grid">
+    <app-product-card
+      *ngFor="let product of products"
+      [product]="product">
+    </app-product-card>
+  </div>
+</section>

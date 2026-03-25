@@ -1,0 +1,24 @@
+.product-list-page h1 {
+  margin-bottom: 24px;
+  color: #111827;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.info-message {
+  padding: 16px;
+  background-color: #eff6ff;
+  border-radius: 8px;
+  color: #1e3a8a;
+}
+
+.error-message {
+  padding: 16px;
+  background-color: #fef2f2;
+  border-radius: 8px;
+  color: #991b1b;
+}

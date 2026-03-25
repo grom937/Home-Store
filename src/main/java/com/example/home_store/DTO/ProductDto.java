@@ -27,7 +27,7 @@ public class ProductDto {
     @Min(value = 0, message = "Ilość nie może być ujemna")
     private int quantity;
 
-    private String imageUrl; // Tutaj nic nie dajemy, bo zabezpieczyliśmy to w Mapperze
+    private String imageUrl;
 
     @NotNull(message = "Typ produktu jest wymagany")
     private ProductType productType;
