@@ -1,0 +1,90 @@
+<h2>Panel zarządzania produktami</h2>
+
+<form [formGroup]="productForm" class="product-form">
+
+  <div>
+    <input formControlName="name" placeholder="Nazwa produktu" />
+
+    <small class="error"
+           *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+      Nazwa jest wymagana (min. 2 znaki)
+    </small>
+  </div>
+
+  <div>
+    <input formControlName="description" placeholder="Opis" />
+  </div>
+
+  <div>
+    <input type="number" formControlName="price" placeholder="Cena" />
+
+    <small class="error"
+           *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+      Cena musi być większa od 0
+    </small>
+  </div>
+
+  <div>
+    <input type="number" formControlName="quantity" placeholder="Ilość" />
+
+    <small class="error"
+           *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched">
+      Ilość nie może być ujemna
+    </small>
+  </div>
+
+  <div>
+    <input formControlName="imageUrl" placeholder="URL obrazka" />
+  </div>
+
+  <div>
+    <select formControlName="productType">
+      <option value="PHYSICAL">Physical</option>
+      <option value="DIGITAL">Digital</option>
+    </select>
+  </div>
+
+  <div>
+    <input type="number" formControlName="categoryId" placeholder="ID kategorii" />
+
+    <small class="error"
+           *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
+      Kategorie jest wymagana
+    </small>
+  </div>
+
+  <button
+    type="button"
+    (click)="addProduct()"
+    [disabled]="productForm.invalid">
+
+    ➕ Dodaj produkt
+  </button>
+
+</form>
+
+<hr />
+
+<h3>Lista produktów</h3>
+
+<div class="products">
+
+  <div class="product-card" *ngFor="let product of products">
+
+    <img [src]="product.imageUrl" alt="product image" width="120" />
+
+    <h4>{{ product.name }}</h4>
+    <p>{{ product.description }}</p>
+
+    <p><b>Cena:</b> {{ product.price }} zł</p>
+    <p><b>Ilość:</b> {{ product.quantity }}</p>
+
+    <button
+      (click)="deleteProduct(product.id!)">
+
+      🗑 Usuń
+    </button>
+
+  </div>
+
+</div>

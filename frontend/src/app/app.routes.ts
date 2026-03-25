@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/pages/home/home.component';
 import { ProductListComponent } from './features/products/pages/product-list/product-list.component';
 import { ProductDetailsComponent } from './features/products/pages/product-details/product-details.component';
+import { ProductManageComponent } from './features/products/pages/product-manage/product-manage.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,16 @@ export const routes: Routes = [
   {
     path: 'products/:id',
     component: ProductDetailsComponent
+  },
+  {
+    path: 'manage-products',
+    component: ProductManageComponent
+  },
+  {
+    path: 'admin/products',
+    loadComponent: () =>
+      import('./features/products/pages/product-manage/product-manage.component')
+        .then(m => m.ProductManageComponent)
   },
   {
     path: '**',

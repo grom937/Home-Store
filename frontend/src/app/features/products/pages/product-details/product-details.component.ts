@@ -38,11 +38,11 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     this.productService.getProductById(productId).subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.product = data;
         this.loading = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Błąd pobierania szczegółów produktu:', err);
         this.error = 'Nie udało się pobrać szczegółów produktu.';
         this.loading = false;

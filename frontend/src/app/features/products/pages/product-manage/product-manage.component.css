@@ -1,0 +1,28 @@
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+input, select {
+  padding: 8px;
+  margin-top: 4px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 200px;
+}

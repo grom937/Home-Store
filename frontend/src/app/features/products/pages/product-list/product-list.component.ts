@@ -28,11 +28,11 @@ export class ProductListComponent implements OnInit {
     this.error = '';
 
     this.productService.getProducts().subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.products = data;
         this.loading = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Błąd pobierania produktów:', err);
         this.error = 'Nie udało się pobrać produktów z backendu.';
         this.loading = false;
