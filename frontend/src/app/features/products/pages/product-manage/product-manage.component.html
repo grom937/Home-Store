@@ -1,98 +1,135 @@
-<h2>Panel zarządzania produktami</h2>
+<section class="manage-page">
+  <h1>Panel zarządzania produktami</h1>
 
-<form [formGroup]="productForm" class="product-form">
+  <div class="manage-layout">
+    <div class="form-card">
+      <h2>Dodaj nowy produkt</h2>
 
-  <div>
-    <input formControlName="name" placeholder="Nazwa produktu" />
+      <form [formGroup]="productForm" class="product-form">
+        <div class="form-group">
+          <label for="name">Nazwa produktu</label>
+          <input id="name" formControlName="name" placeholder="Np. Nowoczesna sofa" />
 
-    <small class="error"
-           *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
-      Nazwa jest wymagana (min. 2 znaki)
-    </small>
+          <small
+            class="error"
+            *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+            Nazwa jest wymagana i musi mieć minimum 2 znaki.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Opis produktu</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            rows="4"
+            placeholder="Krótki opis produktu"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price">Cena</label>
+            <input id="price" type="number" formControlName="price" placeholder="Np. 1999" />
+
+            <small
+              class="error"
+              *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+              Cena musi być większa od 0.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Ilość</label>
+            <input id="quantity" type="number" formControlName="quantity" placeholder="Np. 5" />
+
+            <small
+              class="error"
+              *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched">
+              Ilość nie może być ujemna.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="imageUrl">URL obrazka</label>
+          <input
+            id="imageUrl"
+            formControlName="imageUrl"
+            placeholder="Np. https://example.com/sofa.jpg" />
+
+          <small class="hint">
+            Tutaj wklejasz link do obrazka z internetu. Jeśli zostawisz puste, backend ustawi obrazek zastępczy.
+          </small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="productType">Typ produktu</label>
+            <select id="productType" formControlName="productType">
+              <option *ngFor="let type of productTypes" [value]="type.value">
+                {{ type.label }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="categoryId">Kategoria</label>
+            <select id="categoryId" formControlName="categoryId">
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+
+            <small
+              class="error"
+              *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
+              Kategoria jest wymagana.
+            </small>
+          </div>
+        </div>
+
+        <button type="button" class="primary-button" (click)="addProduct()" [disabled]="productForm.invalid">
+          Dodaj produkt
+        </button>
+      </form>
+    </div>
   </div>
 
-  <div>
-    <input formControlName="description" placeholder="Opis produktu" />
-  </div>
+  <hr />
 
-  <div>
-    <input type="number" formControlName="price" placeholder="Cena" />
+  <section class="products-section">
+    <h2>Lista produktów</h2>
 
-    <small class="error"
-           *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
-      Cena musi być większa od 0
-    </small>
-  </div>
+    <div *ngIf="products.length === 0" class="empty-state">
+      Brak produktów do wyświetlenia.
+    </div>
 
-  <div>
-    <input type="number" formControlName="quantity" placeholder="Ilość" />
+    <div class="products-grid" *ngIf="products.length > 0">
+      <article class="product-card" *ngFor="let product of products">
+        <div class="product-image-wrapper">
+          <img
+            [src]="product.imageUrl || 'https://via.placeholder.com/400x250?text=Brak+zdjecia'"
+            [alt]="product.name"
+            class="product-image" />
+        </div>
 
-    <small class="error"
-           *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched">
-      Ilość nie może być ujemna
-    </small>
-  </div>
+        <div class="product-card-content">
+          <h3>{{ product.name }}</h3>
 
-  <div>
-    <input formControlName="imageUrl" placeholder="URL obrazka" />
-  </div>
+          <p class="description">
+            {{ product.description || 'Brak opisu produktu.' }}
+          </p>
 
-  <div>
-    <select formControlName="productType">
-      <option value="LIVING_ROOM_SOFA">LIVING_ROOM_SOFA</option>
-      <option value="TELEVISION">TELEVISION</option>
-    </select>
-  </div>
+          <p><strong>Cena:</strong> {{ product.price }} zł</p>
+          <p><strong>Ilość:</strong> {{ product.quantity }}</p>
+          <p><strong>Typ:</strong> {{ getProductTypeLabel(product.productType) }}</p>
+          <p><strong>Kategoria:</strong> {{ getCategoryName(product.categoryId) }}</p>
 
-  <div>
-    <select formControlName="categoryId">
-      <option value="" disabled>Wybierz kategorię</option>
-      <option *ngFor="let category of categories" [value]="category.id">
-        {{ category.name }}
-      </option>
-    </select>
-
-    <small class="error"
-           *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
-      Kategoria jest wymagana
-    </small>
-  </div>
-
-  <button
-    type="button"
-    (click)="addProduct()"
-    [disabled]="productForm.invalid">
-
-    ➕ Dodaj produkt
-  </button>
-
-</form>
-
-<hr />
-
-<h3>Lista produktów</h3>
-
-<div class="products">
-
-  <div class="product-card" *ngFor="let product of products">
-
-    <img
-      [src]="product.imageUrl || 'https://via.placeholder.com/200x150?text=Brak+zdjecia'"
-      [alt]="product.name"
-      width="120" />
-
-    <h4>{{ product.name }}</h4>
-    <p>{{ product.description || 'Brak opisu produktu.' }}</p>
-
-    <p><b>Cena:</b> {{ product.price }} zł</p>
-    <p><b>Ilość:</b> {{ product.quantity }}</p>
-    <p><b>Typ:</b> {{ product.productType }}</p>
-    <p><b>Kategoria:</b> {{ getCategoryName(product.categoryId) }}</p>
-
-    <button (click)="deleteProduct(product.id)">
-      🗑 Usuń
-    </button>
-
-  </div>
-
-</div>
+          <button class="delete-button" (click)="deleteProduct(product.id)">
+            Usuń
+          </button>
+        </div>
+      </article>
+    </div>
+  </section>
+</section>

@@ -23,10 +23,15 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
   styleUrl: './product-manage.component.css'
 })
 export class ProductManageComponent implements OnInit {
-
   products: Product[] = [];
   categories: Category[] = [];
-  productForm: any;
+
+  productTypes = [
+    { value: 'LIVING_ROOM_SOFA', label: 'Sofa do salonu' },
+    { value: 'TELEVISION', label: 'Telewizor' }
+  ];
+
+  productForm: ReturnType<FormBuilder['group']>;
 
   constructor(
     private productService: ProductService,
@@ -34,24 +39,21 @@ export class ProductManageComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private fb: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-    this.loadCategories();
-    this.loadProducts();
-  }
-
-  initForm(): void {
+  ) {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       description: [''],
-      price: [0, [Validators.required, Validators.min(1)]],
+      price: [null as number | null, [Validators.required, Validators.min(1)]],
       quantity: [0, [Validators.required, Validators.min(0)]],
       imageUrl: [''],
       productType: ['LIVING_ROOM_SOFA', Validators.required],
       categoryId: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.loadCategories();
+    this.loadProducts();
   }
 
   loadCategories(): void {
@@ -88,7 +90,9 @@ export class ProductManageComponent implements OnInit {
 
   addProduct(): void {
     if (this.productForm.invalid) {
-      this.snackBar.open('Popraw formularz', 'OK', {
+      this.productForm.markAllAsTouched();
+
+      this.snackBar.open('Uzupełnij poprawnie formularz', 'OK', {
         duration: 3000
       });
       return;
@@ -96,32 +100,19 @@ export class ProductManageComponent implements OnInit {
 
     const formValue = this.productForm.getRawValue();
 
-    if (
-      !formValue.name ||
-      formValue.price === null ||
-      formValue.quantity === null ||
-      !formValue.productType ||
-      !formValue.categoryId
-    ) {
-      this.snackBar.open('Brakuje wymaganych danych', 'OK', {
-        duration: 3000
-      });
-      return;
-    }
-
     const productToCreate = {
-      name: formValue.name,
-      description: formValue.description ?? '',
-      price: formValue.price,
-      quantity: formValue.quantity,
-      imageUrl: formValue.imageUrl ?? '',
-      productType: formValue.productType,
-      categoryId: formValue.categoryId
+      name: formValue.name?.trim() ?? '',
+      description: formValue.description?.trim() || '',
+      price: Number(formValue.price),
+      quantity: Number(formValue.quantity),
+      imageUrl: formValue.imageUrl?.trim() || '',
+      productType: formValue.productType ?? 'LIVING_ROOM_SOFA',
+      categoryId: formValue.categoryId ?? ''
     };
 
     this.productService.create(productToCreate).subscribe({
       next: () => {
-        this.snackBar.open('Produkt dodany', 'OK', {
+        this.snackBar.open('Produkt został dodany', 'OK', {
           duration: 3000
         });
 
@@ -130,7 +121,7 @@ export class ProductManageComponent implements OnInit {
         this.productForm.reset({
           name: '',
           description: '',
-          price: 0,
+          price: null,
           quantity: 0,
           imageUrl: '',
           productType: 'LIVING_ROOM_SOFA',
@@ -160,7 +151,7 @@ export class ProductManageComponent implements OnInit {
       if (result) {
         this.productService.delete(id).subscribe({
           next: () => {
-            this.snackBar.open('Usunięto produkt', 'OK', {
+            this.snackBar.open('Produkt został usunięty', 'OK', {
               duration: 3000
             });
 
@@ -177,7 +168,12 @@ export class ProductManageComponent implements OnInit {
   }
 
   getCategoryName(categoryId: string): string {
-    const found = this.categories.find(category => category.id === categoryId);
-    return found ? found.name : categoryId;
+    const found = this.categories.find((category) => category.id === categoryId);
+    return found ? found.name : 'Nieznana kategoria';
+  }
+
+  getProductTypeLabel(productType: string): string {
+    const found = this.productTypes.find((type) => type.value === productType);
+    return found ? found.label : productType;
   }
 }

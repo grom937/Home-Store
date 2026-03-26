@@ -1,8 +1,7 @@
 <div class="product-card">
   <div class="image-wrapper">
     <img
-      *ngIf="product.imageUrl"
-      [src]="product.imageUrl"
+      [src]="product.imageUrl || 'https://via.placeholder.com/600x400?text=Brak+zdjecia'"
       [alt]="product.name"
       class="product-image"
     />
@@ -10,8 +9,6 @@
 
   <div class="product-content">
     <h3>{{ product.name }}</h3>
-
-    <p class="category">ID kategorii: {{ product.categoryId }}</p>
 
     <p class="description">
       {{ product.description || 'Brak opisu produktu.' }}

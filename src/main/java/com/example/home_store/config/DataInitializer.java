@@ -40,7 +40,7 @@ public class DataInitializer implements CommandLineRunner {
                 .description("Wygodna sofa do salonu w nowoczesnym stylu.")
                 .price(BigDecimal.valueOf(1500))
                 .quantity(10)
-                .imageUrl("https://via.placeholder.com/600x400?text=Simple+Sofa")
+                .imageUrl("https://pieris.com.pl/wp-content/uploads/2023/12/Nowoczesna-luksusuowa-wygodna-sofa-hotelowa-rozkladana-Alicante-z-wloska-funkcja-spania-5-1.jpg")
                 .productType(ProductType.LIVING_ROOM_SOFA)
                 .category(sofas)
                 .build();
@@ -50,7 +50,7 @@ public class DataInitializer implements CommandLineRunner {
                 .description("Podstawowy telewizor do codziennego użytku.")
                 .price(BigDecimal.valueOf(2000))
                 .quantity(5)
-                .imageUrl("https://via.placeholder.com/600x400?text=Basic+TV")
+                .imageUrl("https://www.lg.com/content/dam/channel/wcms/pl/images/telewizory/32lm6300pla_aeu_eepl_pl_c/gallery/medium02.jpg")
                 .productType(ProductType.TELEVISION)
                 .category(electronics)
                 .build();

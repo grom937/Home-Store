@@ -12,8 +12,7 @@
   <div *ngIf="!loading && !error && product" class="product-details-card">
     <div class="image-section">
       <img
-        *ngIf="product.imageUrl"
-        [src]="product.imageUrl"
+        [src]="product.imageUrl || 'https://via.placeholder.com/600x400?text=Brak+zdjecia'"
         [alt]="product.name"
         class="product-image"
       />
@@ -22,7 +21,6 @@
     <div class="content-section">
       <h1>{{ product.name }}</h1>
 
-      <p class="category">ID kategorii: {{ product.categoryId }}</p>
       <p class="type">Typ produktu: {{ product.productType }}</p>
       <p class="description">
         {{ product.description || 'Brak opisu produktu.' }}
