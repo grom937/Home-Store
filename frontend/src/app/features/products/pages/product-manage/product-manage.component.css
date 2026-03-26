@@ -3,9 +3,12 @@
   flex-direction: column;
   gap: 10px;
   max-width: 400px;
+  margin-bottom: 24px;
 }
 
-input, select {
+input,
+select,
+button {
   padding: 8px;
   margin-top: 4px;
 }
@@ -24,5 +27,13 @@ input, select {
 .product-card {
   border: 1px solid #ddd;
   padding: 10px;
-  width: 200px;
+  width: 220px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.product-card img {
+  display: block;
+  margin-bottom: 8px;
+  object-fit: cover;
 }

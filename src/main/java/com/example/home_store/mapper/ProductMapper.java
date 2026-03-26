@@ -1,6 +1,5 @@
 package com.example.home_store.mapper;
 
-
 import com.example.home_store.DTO.ProductDto;
 import com.example.home_store.model.Category;
 import com.example.home_store.model.Product;
@@ -24,7 +23,7 @@ public class ProductMapper {
 
     public Product toEntity(ProductDto dto, Category category) {
         String safeImageUrl = (dto.getImageUrl() == null || dto.getImageUrl().trim().isEmpty())
-                ? "https://via.placeholder.com/400x300?text=Brak+zdjęcia"
+                ? "https://via.placeholder.com/600x400?text=Brak+zdjecia"
                 : dto.getImageUrl();
 
         return Product.builder()

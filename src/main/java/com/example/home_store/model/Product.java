@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,8 +16,8 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String name;
 
@@ -27,12 +28,6 @@ public class Product {
 
     private int quantity;
 
-    @PrePersist
-    public void prePersist() {
-        if (this.imageUrl == null || this.imageUrl.trim().isEmpty()) {
-            this.imageUrl = "https://via.placeholder.com/400x300?text=Brak+zdjęcia";
-        }
-    }
     private String imageUrl;
 
     @Enumerated(EnumType.STRING)
@@ -41,4 +36,11 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.imageUrl == null || this.imageUrl.trim().isEmpty()) {
+            this.imageUrl = "https://via.placeholder.com/600x400?text=Brak+zdjecia";
+        }
+    }
 }

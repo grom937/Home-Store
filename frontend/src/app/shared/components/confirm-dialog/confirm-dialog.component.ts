@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/materia
 
     <p>{{ data.message }}</p>
 
-    <div style="margin-top: 20px;">
+    <div style="margin-top: 20px; display: flex; gap: 10px;">
       <button (click)="close(false)">Anuluj</button>
       <button (click)="close(true)">Usuń</button>
     </div>
@@ -20,8 +20,8 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/materia
 export class ConfirmDialogComponent {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<any>
+    @Inject(MAT_DIALOG_DATA) public data: { message: string },
+    private dialogRef: MatDialogRef<ConfirmDialogComponent>
   ) {}
 
   close(result: boolean): void {

@@ -1,18 +1,18 @@
 package com.example.home_store.DTO;
 
-
 import com.example.home_store.model.enum_model.ProductType;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
-    private Long id;
+    private UUID id;
 
     @NotBlank(message = "Nazwa produktu nie może być pusta")
     @Size(min = 2, max = 100, message = "Nazwa musi mieć od 2 do 100 znaków")
@@ -33,5 +33,5 @@ public class ProductDto {
     private ProductType productType;
 
     @NotNull(message = "ID kategorii jest wymagane")
-    private Long categoryId;
+    private UUID categoryId;
 }

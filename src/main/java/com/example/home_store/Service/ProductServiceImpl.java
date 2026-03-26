@@ -1,6 +1,5 @@
 package com.example.home_store.Service;
 
-
 import com.example.home_store.DTO.ProductDto;
 import com.example.home_store.mapper.ProductMapper;
 import com.example.home_store.model.Category;
@@ -10,19 +9,19 @@ import com.example.home_store.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
+
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ProductMapper mapper;
 
     @Override
     public ProductDto create(ProductDto dto) {
-
         Category category = categoryRepository.findById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
@@ -40,13 +39,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getById(Long id) {
+    public ProductDto getById(UUID id) {
         return mapper.toDto(productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found")));
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(UUID id) {
         productRepository.deleteById(id);
     }
 }

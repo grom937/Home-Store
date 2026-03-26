@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -17,8 +18,8 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String email;
     private String password;
@@ -36,7 +37,6 @@ public class User {
     @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
-
 
     public void addAddress(Address address) {
         addresses.add(address);

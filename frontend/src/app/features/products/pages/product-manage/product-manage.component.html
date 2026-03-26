@@ -12,7 +12,7 @@
   </div>
 
   <div>
-    <input formControlName="description" placeholder="Opis" />
+    <input formControlName="description" placeholder="Opis produktu" />
   </div>
 
   <div>
@@ -39,17 +39,22 @@
 
   <div>
     <select formControlName="productType">
-      <option value="PHYSICAL">Physical</option>
-      <option value="DIGITAL">Digital</option>
+      <option value="LIVING_ROOM_SOFA">LIVING_ROOM_SOFA</option>
+      <option value="TELEVISION">TELEVISION</option>
     </select>
   </div>
 
   <div>
-    <input type="number" formControlName="categoryId" placeholder="ID kategorii" />
+    <select formControlName="categoryId">
+      <option value="" disabled>Wybierz kategorię</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
 
     <small class="error"
            *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
-      Kategorie jest wymagana
+      Kategoria jest wymagana
     </small>
   </div>
 
@@ -71,17 +76,20 @@
 
   <div class="product-card" *ngFor="let product of products">
 
-    <img [src]="product.imageUrl" alt="product image" width="120" />
+    <img
+      [src]="product.imageUrl || 'https://via.placeholder.com/200x150?text=Brak+zdjecia'"
+      [alt]="product.name"
+      width="120" />
 
     <h4>{{ product.name }}</h4>
-    <p>{{ product.description }}</p>
+    <p>{{ product.description || 'Brak opisu produktu.' }}</p>
 
     <p><b>Cena:</b> {{ product.price }} zł</p>
     <p><b>Ilość:</b> {{ product.quantity }}</p>
+    <p><b>Typ:</b> {{ product.productType }}</p>
+    <p><b>Kategoria:</b> {{ getCategoryName(product.categoryId) }}</p>
 
-    <button
-      (click)="deleteProduct(product.id!)">
-
+    <button (click)="deleteProduct(product.id)">
       🗑 Usuń
     </button>
 

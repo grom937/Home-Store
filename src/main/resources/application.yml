@@ -11,6 +11,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        type:
+          preferred_uuid_jdbc_type: CHAR
 
 server:
   port: 8080

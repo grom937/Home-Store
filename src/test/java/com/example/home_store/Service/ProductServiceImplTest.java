@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,12 +36,15 @@ class ProductServiceImplTest {
 
     @Test
     void shouldCreateProductSuccessfully() {
-        ProductDto inputDto = ProductDto.builder().categoryId(1L).name("Test").build();
-        Category category = Category.builder().id(1L).name("Furniture").build();
-        Product productEntity = Product.builder().id(1L).name("Test").category(category).build();
-        ProductDto outputDto = ProductDto.builder().id(1L).name("Test").categoryId(1L).build();
+        UUID categoryId = UUID.randomUUID();
+        UUID productId = UUID.randomUUID();
 
-        Mockito.when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
+        ProductDto inputDto = ProductDto.builder().categoryId(categoryId).name("Test").build();
+        Category category = Category.builder().id(categoryId).name("Furniture").build();
+        Product productEntity = Product.builder().id(productId).name("Test").category(category).build();
+        ProductDto outputDto = ProductDto.builder().id(productId).name("Test").categoryId(categoryId).build();
+
+        Mockito.when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
         Mockito.when(mapper.toEntity(inputDto, category)).thenReturn(productEntity);
         Mockito.when(productRepository.save(productEntity)).thenReturn(productEntity);
         Mockito.when(mapper.toDto(productEntity)).thenReturn(outputDto);
@@ -48,15 +52,17 @@ class ProductServiceImplTest {
         ProductDto result = productService.create(inputDto);
 
         assertNotNull(result);
-        assertEquals(1L, result.getId());
+        assertEquals(productId, result.getId());
         assertEquals("Test", result.getName());
         Mockito.verify(productRepository, Mockito.times(1)).save(productEntity);
     }
 
     @Test
     void shouldThrowExceptionWhenCreatingProductWithNonExistentCategory() {
-        ProductDto inputDto = ProductDto.builder().categoryId(99L).build();
-        Mockito.when(categoryRepository.findById(99L)).thenReturn(Optional.empty());
+        UUID categoryId = UUID.randomUUID();
+        ProductDto inputDto = ProductDto.builder().categoryId(categoryId).build();
+
+        Mockito.when(categoryRepository.findById(categoryId)).thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             productService.create(inputDto);
@@ -68,20 +74,21 @@ class ProductServiceImplTest {
 
     @Test
     void shouldReturnProductById() {
-        Product product = Product.builder().id(1L).name("Test").build();
-        ProductDto dto = ProductDto.builder().id(1L).name("Test").build();
+        UUID productId = UUID.randomUUID();
+        Product product = Product.builder().id(productId).name("Test").build();
+        ProductDto dto = ProductDto.builder().id(productId).name("Test").build();
 
-        Mockito.when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+        Mockito.when(productRepository.findById(productId)).thenReturn(Optional.of(product));
         Mockito.when(mapper.toDto(product)).thenReturn(dto);
 
-        ProductDto result = productService.getById(1L);
+        ProductDto result = productService.getById(productId);
         assertNotNull(result);
-        assertEquals(1L, result.getId());
+        assertEquals(productId, result.getId());
     }
 
     @Test
     void shouldDeleteProduct() {
-        Long productId = 1L;
+        UUID productId = UUID.randomUUID();
 
         productService.delete(productId);
 

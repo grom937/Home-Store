@@ -29,20 +29,12 @@ export class ProductDetailsComponent implements OnInit {
       return;
     }
 
-    const productId = Number(idParam);
-
-    if (isNaN(productId)) {
-      this.error = 'Id produktu nie jest poprawną liczbą.';
-      this.loading = false;
-      return;
-    }
-
-    this.productService.getProductById(productId).subscribe({
-      next: (data: any) => {
+    this.productService.getProductById(idParam).subscribe({
+      next: (data) => {
         this.product = data;
         this.loading = false;
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error('Błąd pobierania szczegółów produktu:', err);
         this.error = 'Nie udało się pobrać szczegółów produktu.';
         this.loading = false;
