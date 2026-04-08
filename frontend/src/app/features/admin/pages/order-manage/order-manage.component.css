@@ -1,0 +1,11 @@
+.order-manage-page {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.order-manage-page h1 {
+  margin-top: 0;
+  color: #111827;
+}

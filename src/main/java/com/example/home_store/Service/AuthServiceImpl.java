@@ -1,5 +1,7 @@
 package com.example.home_store.Service;
 
+import com.example.home_store.DTO.AuthResponseDto;
+import com.example.home_store.DTO.LoginRequestDto;
 import com.example.home_store.DTO.RegisterRequestDto;
 import com.example.home_store.DTO.RegisterResponseDto;
 import com.example.home_store.model.Cart;
@@ -49,7 +51,27 @@ public class AuthServiceImpl implements AuthService {
         return RegisterResponseDto.builder()
                 .id(savedUser.getId())
                 .email(savedUser.getEmail())
+                .role(savedUser.getRole().name())
                 .message("Konto zostało utworzone.")
+                .build();
+    }
+
+    @Override
+    public AuthResponseDto login(LoginRequestDto dto) {
+        String email = dto.getEmail().trim().toLowerCase();
+
+        User user = userRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new IllegalArgumentException("Nieprawidłowy email lub hasło."));
+
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Nieprawidłowy email lub hasło.");
+        }
+
+        return AuthResponseDto.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .role(user.getRole().name())
+                .message("Logowanie zakończone sukcesem.")
                 .build();
     }
 }

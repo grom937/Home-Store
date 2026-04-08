@@ -6,15 +6,34 @@
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         Strona główna
       </a>
+
       <a routerLink="/products" routerLinkActive="active">
         Produkty
       </a>
-      <a routerLink="/register" routerLinkActive="active">
+
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/register" routerLinkActive="active">
         Rejestracja
       </a>
-      <a routerLink="/admin/products" routerLinkActive="active">
-        Zarządzanie
+
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">
+        Logowanie
       </a>
+
+      <a *ngIf="authService.isAdmin()" routerLink="/admin/products" routerLinkActive="active">
+        Zarządzanie produktami
+      </a>
+
+      <a *ngIf="authService.isAdmin()" routerLink="/admin/orders" routerLinkActive="active">
+        Zarządzanie zamówieniami
+      </a>
+
+      <span *ngIf="authService.isLoggedIn()" class="user-info">
+        {{ authService.getCurrentUser()?.email }}
+      </span>
+
+      <button *ngIf="authService.isLoggedIn()" class="logout-button" (click)="logout()">
+        Wyloguj
+      </button>
     </div>
   </div>
 </nav>

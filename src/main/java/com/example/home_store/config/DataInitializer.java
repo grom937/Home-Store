@@ -1,12 +1,18 @@
 package com.example.home_store.config;
 
+import com.example.home_store.model.Cart;
 import com.example.home_store.model.Category;
 import com.example.home_store.model.Product;
+import com.example.home_store.model.User;
 import com.example.home_store.model.enum_model.ProductType;
+import com.example.home_store.model.enum_model.UserRole;
 import com.example.home_store.repository.CategoryRepository;
 import com.example.home_store.repository.ProductRepository;
+import com.example.home_store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -18,9 +24,14 @@ public class DataInitializer implements CommandLineRunner {
 
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public void run(String... args) {
+        createAdminIfMissing();
+
         if (categoryRepository.count() > 0 || productRepository.count() > 0) {
             return;
         }
@@ -56,5 +67,25 @@ public class DataInitializer implements CommandLineRunner {
                 .build();
 
         productRepository.saveAll(List.of(p1, p2));
+    }
+
+    private void createAdminIfMissing() {
+        if (userRepository.existsByEmailIgnoreCase("admin@homestore.pl")) {
+            return;
+        }
+
+        User admin = User.builder()
+                .email("admin@homestore.pl")
+                .password(passwordEncoder.encode("admin123"))
+                .role(UserRole.ADMIN)
+                .build();
+
+        Cart cart = Cart.builder()
+                .user(admin)
+                .build();
+
+        admin.setCart(cart);
+
+        userRepository.save(admin);
     }
 }

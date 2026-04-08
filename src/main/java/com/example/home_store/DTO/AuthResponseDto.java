@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 @Builder
 @AllArgsConstructor
-public class RegisterResponseDto {
+public class AuthResponseDto {
     private UUID id;
     private String email;
     private String role;

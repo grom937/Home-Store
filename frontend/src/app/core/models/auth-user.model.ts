@@ -1,6 +1,5 @@
-export interface RegisterResponse {
+export interface AuthUser {
   id: string;
   email: string;
   role: 'USER' | 'ADMIN';
-  message: string;
 }
