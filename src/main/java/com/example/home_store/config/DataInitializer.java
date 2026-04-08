@@ -457,7 +457,17 @@ public class DataInitializer implements CommandLineRunner {
                         "https://ranking-oczyszczaczy.pl/wp-content/uploads/porownanie-oczyszczacze-powietrza-do-sypialni-scaled-e1668607555756.jpg",
                         ProductType.AIR_PURIFIER,
                         agd
+                ),
+                product(
+                        "Oczyszczacz Air Super Pure",
+                        "Oczyszczacz powietrza do całego domu.",
+                        800,
+                        2,
+                        "https://klarta.pl/wp-content/uploads/2023/03/klarta-humea-grande-white-nalewanie-wody_11zon.webp",
+                        ProductType.AIR_PURIFIER,
+                        agd
                 )
+
         );
 
         productRepository.saveAll(products);
