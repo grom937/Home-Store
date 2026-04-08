@@ -1,0 +1,56 @@
+<section class="register-page">
+  <div class="register-card">
+    <h1>Rejestracja</h1>
+    <p class="subtitle">Utwórz nowe konto w Home Store.</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="submit()" class="register-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="np. jan.kowalski@email.com" />
+
+        <small class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          Podaj poprawny adres email.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Hasło</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="minimum 6 znaków" />
+
+        <small class="error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          Hasło musi mieć co najmniej 6 znaków.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Powtórz hasło</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="powtórz hasło" />
+
+        <small class="error" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+          Potwierdzenie hasła jest wymagane.
+        </small>
+      </div>
+
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Tworzenie konta...' : 'Zarejestruj się' }}
+      </button>
+    </form>
+
+    <a routerLink="/" class="back-link">Wróć na stronę główną</a>
+  </div>
+</section>

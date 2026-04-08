@@ -24,6 +24,12 @@ export const routes: Routes = [
         .then(m => m.ProductManageComponent)
   },
   {
+    path: 'register',
+    loadComponent: () =>
+      import('./features/auth/pages/register/register.component')
+        .then(m => m.RegisterComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
