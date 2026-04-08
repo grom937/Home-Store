@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './features/home/pages/home/home.component';
+import { ProductListComponent } from './features/products/pages/product-list/product-list.component';
+import { ProductDetailsComponent } from './features/products/pages/product-details/product-details.component';
 import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
@@ -10,15 +12,11 @@ export const routes: Routes = [
   },
   {
     path: 'products',
-    loadComponent: () =>
-      import('./features/products/pages/product-list/product-list.component')
-        .then(m => m.ProductListComponent)
+    component: ProductListComponent
   },
   {
     path: 'products/:id',
-    loadComponent: () =>
-      import('./features/products/pages/product-details/product-details.component')
-        .then(m => m.ProductDetailsComponent)
+    component: ProductDetailsComponent
   },
   {
     path: 'register',

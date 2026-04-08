@@ -60,7 +60,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Wygodna sofa do salonu w nowoczesnym stylu.",
                         1999,
                         8,
-                        "TUTAJ_WKLEJ_URL_LIVING_ROOM_SOFA",
+                        "https://zona-design.pl/160979-large_default/sofa-rozkladana-tino-c-cm-z-funkcja-spania.jpg",
                         ProductType.LIVING_ROOM_SOFA,
                         livingRoom
                 ),
@@ -69,7 +69,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Praktyczny stolik kawowy do salonu z półką na drobiazgi.",
                         499,
                         12,
-                        "TUTAJ_WKLEJ_URL_LIVING_ROOM_COFFEE_TABLE",
+                        "https://soolido.pl/userdata/public/gfx/6360/Stolik-kawowy-Ellon-70x70-cm-z-otwarta-szuflada-i-polka%2C-widok-w-aranzacji-salonu..webp",
                         ProductType.LIVING_ROOM_COFFEE_TABLE,
                         livingRoom
                 ),
@@ -78,7 +78,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Wysoki regał do salonu na książki i dekoracje.",
                         899,
                         6,
-                        "TUTAJ_WKLEJ_URL_LIVING_ROOM_BOOKCASE",
+                        "https://www.mebel-partner.pl/pub/media/catalog/product-resized/e/l/elegancki-wysoki-regal-na-ksiazki-i-dekoracje-joris-orzech-stelaz-czarny_2_-0-x900.webp",
                         ProductType.LIVING_ROOM_BOOKCASE,
                         livingRoom
                 ),
@@ -87,7 +87,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Miękki fotel wypoczynkowy idealny do czytania i odpoczynku.",
                         1099,
                         5,
-                        "TUTAJ_WKLEJ_URL_LIVING_ROOM_ARMCHAIR",
+                        "https://meblemakarowski.pl/img/cms/BLOG2/fotel-rozkladany-z-podnozkiem-spencer-szary-sztruksowy-nowoczesny.jpg",
                         ProductType.LIVING_ROOM_ARMCHAIR,
                         livingRoom
                 ),
@@ -97,7 +97,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Duże łóżko do sypialni z wygodnym zagłówkiem.",
                         2399,
                         4,
-                        "TUTAJ_WKLEJ_URL_BEDROOM_BED",
+                        "https://meblini.pl/userdata/public/gfx/29030/Lozko-tapicerowane-MEDIOLAN-w-tkaninie-monolith-25090.jpg",
                         ProductType.BEDROOM_BED,
                         bedroom
                 ),
@@ -106,7 +106,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Pojemna szafa do sypialni z drzwiami przesuwnymi.",
                         1799,
                         5,
-                        "TUTAJ_WKLEJ_URL_BEDROOM_WARDROBE",
+                        "https://meblegracjansklep.pl/userdata/public/gfx/1306/Szafa-przesuwna-Mila-lustro-LEFKAS.webp",
                         ProductType.BEDROOM_WARDROBE,
                         bedroom
                 ),
@@ -115,7 +115,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Komoda do sypialni z szerokimi szufladami.",
                         999,
                         7,
-                        "TUTAJ_WKLEJ_URL_BEDROOM_CHEST_OF_DRAWERS",
+                        "https://m.media-amazon.com/images/I/71AdVoopNXL._AC_UF894,1000_QL80_.jpg",
                         ProductType.BEDROOM_CHEST_OF_DRAWERS,
                         bedroom
                 ),
@@ -124,7 +124,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Mała szafka nocna z miejscem na lampkę i książkę.",
                         349,
                         10,
-                        "TUTAJ_WKLEJ_URL_BEDROOM_NIGHT_STAND",
+                        "https://m.media-amazon.com/images/I/71Sldtf3ZZL._AC_UF894,1000_QL80_.jpg",
                         ProductType.BEDROOM_NIGHT_STAND,
                         bedroom
                 ),
@@ -134,7 +134,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Solidny stół kuchenny do codziennych posiłków.",
                         1299,
                         6,
-                        "TUTAJ_WKLEJ_URL_KITCHEN_TABLE",
+                        "https://a.allegroimg.com/original/11787c/96c5988e4230a4787682d027a386",
                         ProductType.KITCHEN_TABLE,
                         kitchen
                 ),
@@ -143,7 +143,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Wygodne krzesło do kuchni i jadalni.",
                         249,
                         20,
-                        "TUTAJ_WKLEJ_URL_KITCHEN_CHAIR",
+                        "https://www.mebel-partner.pl/pub/media/catalog/product-resized/k/r/krzeslo_elina_czarny-czarny_skora_ekologiczna__podstawa_czarny_8_-0-x1200.webp",
                         ProductType.KITCHEN_CHAIR,
                         kitchen
                 ),
@@ -152,7 +152,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Nowoczesny zlew kuchenny ze stali nierdzewnej.",
                         599,
                         9,
-                        "TUTAJ_WKLEJ_URL_KITCHEN_SINK",
+                        "https://kochamymeble.pl/img/products/55/75/1_max.jpg",
                         ProductType.KITCHEN_SINK,
                         kitchen
                 ),
@@ -161,7 +161,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Szafka stojąca do zabudowy kuchennej.",
                         699,
                         11,
-                        "TUTAJ_WKLEJ_URL_KITCHEN_CABINET",
+                        "https://dominat-meble.pl/4741-large_default/szafka-do-piekarnika-pod-zabudowe-szara-artisan.jpg",
                         ProductType.KITCHEN_CABINET,
                         kitchen
                 ),
@@ -170,7 +170,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Nowoczesny hoker do wyspy kuchennej lub barku.",
                         399,
                         8,
-                        "TUTAJ_WKLEJ_URL_KITCHEN_BAR_STOOL",
+                        "https://www.deltachairs.com/img/blog/107/krakow_hoker_zdj1.jpg",
                         ProductType.KITCHEN_BAR_STOOL,
                         kitchen
                 ),
@@ -180,7 +180,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Łazienkowa szafka pod umywalkę z półkami.",
                         799,
                         7,
-                        "TUTAJ_WKLEJ_URL_BATHROOM_SINK_CABINET",
+                        "https://www.lazienkowy.pl/obrazki4/szafka-lazienkowa-pod-umywalke-nablatowa-harmony-studio-031025.jpg",
                         ProductType.BATHROOM_SINK_CABINET,
                         bathroom
                 ),
@@ -189,7 +189,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Klasyczna wanna do nowoczesnej łazienki.",
                         1899,
                         3,
-                        "TUTAJ_WKLEJ_URL_BATHROOM_BATH",
+                        "https://www.twojabateria.pl/upload/stblog/2/672/2032/6722032large.jpg",
                         ProductType.BATHROOM_BATH,
                         bathroom
                 ),
@@ -198,7 +198,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Wąska szafka do przechowywania ręczników i kosmetyków.",
                         649,
                         9,
-                        "TUTAJ_WKLEJ_URL_BATHROOM_STORAGE_CABINET",
+                        "https://m.media-amazon.com/images/I/71kk15IDsLL._AC_UF894,1000_QL80_.jpg",
                         ProductType.BATHROOM_STORAGE_CABINET,
                         bathroom
                 ),
@@ -207,7 +207,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Praktyczna półka ścienna do łazienki.",
                         199,
                         15,
-                        "TUTAJ_WKLEJ_URL_BATHROOM_SHELF",
+                        "https://notodo.pl/uploads/products/3232/polka-wiszaca-do-lazienki-rosa-3.jpg",
                         ProductType.BATHROOM_SHELF,
                         bathroom
                 ),
@@ -216,7 +216,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Kosz na pranie do łazienki z pokrywą.",
                         179,
                         14,
-                        "TUTAJ_WKLEJ_URL_BATHROOM_LAUNDRY_BASKET",
+                        "https://static.brw.pl/brw/img/produkt/533327/kosz-z-pokrywa-na-bielizne-pranie-duzy-50l-kolory-slarge.jpg",
                         ProductType.BATHROOM_LAUNDRY_BASKET,
                         bathroom
                 ),
@@ -226,7 +226,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Funkcjonalne biurko do pracy i nauki.",
                         999,
                         8,
-                        "TUTAJ_WKLEJ_URL_OFFICE_DESK",
+                        "https://a.allegroimg.com/original/1133a7/ddd493de4f85b8b4e845cc2e6422/Funkcjonalne-biurko-narozne-do-pracy-szkoly-nauki",
                         ProductType.OFFICE_DESK,
                         office
                 ),
@@ -235,7 +235,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Ergonomiczny fotel biurowy z regulacją wysokości.",
                         899,
                         10,
-                        "TUTAJ_WKLEJ_URL_OFFICE_CHAIR",
+                        "https://a.allegroimg.com/original/118bb9/8377f8b94b0891e6d96b0a6abf50/FOTEL-BIUROWY-CZARNY-KRZESLO-BIUROWE-FOTEL-OBROTOWY-ERGONOMICZNY-SKORZANY-Rodzaj-obrotowy",
                         ProductType.OFFICE_CHAIR,
                         office
                 ),
@@ -244,7 +244,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Regał na dokumenty i książki do domowego biura.",
                         749,
                         6,
-                        "TUTAJ_WKLEJ_URL_OFFICE_BOOKCASE",
+                        "https://deerhorn.pl/wp-content/uploads/2023/12/regal-na-dokumenty-czarny.jpg",
                         ProductType.OFFICE_BOOKCASE,
                         office
                 ),
@@ -253,7 +253,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Zamykana szafka biurowa na akta i dokumenty.",
                         829,
                         5,
-                        "TUTAJ_WKLEJ_URL_OFFICE_FILE_CABINET",
+                        "https://alekrzesla.pl/66549-large_default/biurowa-szafa-metalowa-na-akta-jan-9040185h-antracytowa-orzech.jpg",
                         ProductType.OFFICE_FILE_CABINET,
                         office
                 ),
@@ -263,7 +263,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Szafka do przedpokoju na kilka par butów.",
                         499,
                         10,
-                        "TUTAJ_WKLEJ_URL_HALLWAY_SHOE_CABINET",
+                        "https://a.allegroimg.com/original/11141c/1f45abd049528efc5d524564c598/Szafa-na-buty-180x80-do-przedpokoju-25-par-obuwia",
                         ProductType.HALLWAY_SHOE_CABINET,
                         hallway
                 ),
@@ -272,7 +272,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Stojący wieszak na kurtki i płaszcze.",
                         229,
                         13,
-                        "TUTAJ_WKLEJ_URL_HALLWAY_COAT_RACK",
+                        "https://static.brw.pl/brw/img/produkt/435340/stojak-tree-wieszak-na-kurtki-i-plaszcze-wys-180-cm-slarge.jpg",
                         ProductType.HALLWAY_COAT_RACK,
                         hallway
                 ),
@@ -281,7 +281,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Ławka do przedpokoju z miejscem do siedzenia.",
                         549,
                         7,
-                        "TUTAJ_WKLEJ_URL_HALLWAY_BENCH",
+                        "https://timbersky.pl/wp-content/uploads/2023/10/Ascella-04.png",
                         ProductType.HALLWAY_BENCH,
                         hallway
                 ),
@@ -290,7 +290,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Duże lustro do przedpokoju w prostej ramie.",
                         379,
                         9,
-                        "TUTAJ_WKLEJ_URL_HALLWAY_MIRROR",
+                        "https://sklep.stolarstwo-smaza.pl/userdata/public/gfx/4576/Duze-prostokatne-lustro-w-czarnej-drewnianej-ramie-180x80.jpg",
                         ProductType.HALLWAY_MIRROR,
                         hallway
                 ),
@@ -300,7 +300,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Nowoczesny telewizor 55 cali do salonu.",
                         2999,
                         4,
-                        "TUTAJ_WKLEJ_URL_TELEVISION",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6aRPxec_HdX9fsv501VTYVdjaWmbBdhXF-A&s",
                         ProductType.TELEVISION,
                         rtv
                 ),
@@ -309,7 +309,7 @@ public class DataInitializer implements CommandLineRunner {
                         "System audio poprawiający jakość dźwięku w domu.",
                         1199,
                         6,
-                        "TUTAJ_WKLEJ_URL_SOUND_SYSTEM",
+                        "https://sklep.audiocolor.pl/wp-content/smush-webp/2025/06/Technics-SC-CX700-czarny-Roon-Nucleus-One-audiocolor-warszawa-1.png.webp",
                         ProductType.SOUND_SYSTEM,
                         rtv
                 ),
@@ -318,7 +318,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Zestaw kina domowego do filmów i seriali.",
                         2499,
                         3,
-                        "TUTAJ_WKLEJ_URL_HOME_THEATER",
+                        "https://www.tophifi.pl/media/wysiwyg/NAD/m17-v2i/nad-m17-v2i.jpg",
                         ProductType.HOME_THEATER,
                         rtv
                 ),
@@ -327,7 +327,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Urządzenie do odtwarzania multimediów i aplikacji.",
                         499,
                         8,
-                        "TUTAJ_WKLEJ_URL_MEDIA_PLAYER",
+                        "https://sklep.rms.pl/img/product_media/35001-36000/MS120_black_avant_copie.jpg",
                         ProductType.MEDIA_PLAYER,
                         rtv
                 ),
@@ -336,7 +336,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Konsola do gier dla całej rodziny.",
                         2199,
                         5,
-                        "TUTAJ_WKLEJ_URL_GAME_CONSOLE",
+                        "https://m.media-amazon.com/images/I/51zgnbshSsL._AC_SY300_SX300_QL70_ML2_.jpg",
                         ProductType.GAME_CONSOLE,
                         rtv
                 ),
@@ -346,7 +346,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Pojemna lodówka do nowoczesnej kuchni.",
                         2799,
                         4,
-                        "TUTAJ_WKLEJ_URL_REFRIGERATOR",
+                        "https://paypo.pl/blog/wp-content/uploads/2021/09/Nowy-projekt-16.png",
                         ProductType.REFRIGERATOR,
                         agd
                 ),
@@ -355,7 +355,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Zmywarka do codziennego użytku w domu.",
                         1999,
                         4,
-                        "TUTAJ_WKLEJ_URL_DISHWASHER",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1GCecxs048mX8CM2YjB4q0-6hzwHPrDMtRg&s",
                         ProductType.DISHWASHER,
                         agd
                 ),
@@ -364,7 +364,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Automatyczna pralka do domu i mieszkania.",
                         1899,
                         6,
-                        "TUTAJ_WKLEJ_URL_WASHING_MACHINE",
+                        "https://m.media-amazon.com/images/I/71VKM3-oDYL._AC_UF1000,1000_QL80_.jpg",
                         ProductType.WASHING_MACHINE,
                         agd
                 ),
@@ -373,7 +373,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Suszarka bębnowa oszczędzająca czas i miejsce.",
                         2099,
                         3,
-                        "TUTAJ_WKLEJ_URL_DRYER",
+                        "https://m.media-amazon.com/images/I/71IPplLhQTL._AC_UF894,1000_QL80_.jpg",
                         ProductType.DRYER,
                         agd
                 ),
@@ -382,7 +382,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Piekarnik do pieczenia i przygotowywania potraw.",
                         1599,
                         5,
-                        "TUTAJ_WKLEJ_URL_OVEN",
+                        "https://a.allegroimg.com/s512/11c03f/23421e2843eb88b8bea377edda7f/DWUSTREFOWY-DZIELONY-PIEKARNIK-ELEKTRYCZNY-FRYTOWNICA-BEZTLUSZCZOWA-12L",
                         ProductType.OVEN,
                         agd
                 ),
@@ -391,7 +391,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Kuchenka mikrofalowa do szybkiego podgrzewania dań.",
                         449,
                         9,
-                        "TUTAJ_WKLEJ_URL_MICROWAVE",
+                        "https://mmgastro.pl/hpeciai/2a658cadaf567600363e288f263bd43c/pol_pl_Kuchenka-mikrofalowa-z-funkcja-grilla-700-W-20-l-HENDI-281710-131365_1.webp",
                         ProductType.MICROWAVE,
                         agd
                 ),
@@ -400,7 +400,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Ekspres do kawy dla miłośników espresso i cappuccino.",
                         1299,
                         6,
-                        "TUTAJ_WKLEJ_URL_COFFEE_MACHINE",
+                        "https://ocdn.eu/pulscms/MDA_/6fd33f53cd658b0627dd96fc8167ff0c.jpg",
                         ProductType.COFFEE_MACHINE,
                         agd
                 ),
@@ -409,7 +409,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Elektryczny czajnik do szybkiego gotowania wody.",
                         149,
                         16,
-                        "TUTAJ_WKLEJ_URL_KETTLE",
+                        "https://a.allegroimg.com/original/113c45/e467eb3d4464be75dc362f65e163/KRAFT-DELE-CZAJNIK-ELEKTRYCZNY-1-8L-2400W-SZYBKIE-GOTOWANIE-WODY-KD4104",
                         ProductType.KETTLE,
                         agd
                 ),
@@ -418,7 +418,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Toster do przygotowania chrupiących grzanek.",
                         129,
                         14,
-                        "TUTAJ_WKLEJ_URL_TOASTER",
+                        "https://static3.redcart.pl/templates/images/thumb/939969/1500/1500/pl/0/templates/images/products/939969/13ddf7be932cf5c346ede929d653679a.jpeg",
                         ProductType.TOASTER,
                         agd
                 ),
@@ -427,7 +427,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Blender do koktajli, zup i sosów.",
                         219,
                         11,
-                        "TUTAJ_WKLEJ_URL_BLENDER",
+                        "https://js.europ24.pl/67558-medium_default/blender-reczny-mg-home-300w-z-regulacja-predkosci-czarny-do-zup-koktajli-mocny.jpg",
                         ProductType.BLENDER,
                         agd
                 ),
@@ -436,7 +436,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Odkurzacz do codziennego sprzątania domu.",
                         899,
                         7,
-                        "TUTAJ_WKLEJ_URL_VACUUM_CLEANER",
+                        "https://www.sencor.pl/Sencor/media/content/Products/41018171-03.jpg",
                         ProductType.VACUUM_CLEANER,
                         agd
                 ),
@@ -445,7 +445,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Żelazko parowe do prasowania ubrań.",
                         269,
                         10,
-                        "TUTAJ_WKLEJ_URL_IRON",
+                        "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTLivdBxO3CfXzGwk6i6nCpb8sl7SlO6JtuyVwKIcRbiK42g8WA0IFuOSIT7zMwYRdECPO0hR4fwRqcw7Vl9PunkHJ_xm5P3eWwPChRcgz0fS1W_eHMTSbb",
                         ProductType.IRON,
                         agd
                 ),
@@ -454,10 +454,20 @@ public class DataInitializer implements CommandLineRunner {
                         "Oczyszczacz powietrza do domu i sypialni.",
                         1099,
                         5,
-                        "TUTAJ_WKLEJ_URL_AIR_PURIFIER",
+                        "https://ranking-oczyszczaczy.pl/wp-content/uploads/porownanie-oczyszczacze-powietrza-do-sypialni-scaled-e1668607555756.jpg",
+                        ProductType.AIR_PURIFIER,
+                        agd
+                ),
+                product(
+                        "Oczyszczacz Air Super Pure",
+                        "Oczyszczacz powietrza do całego domu.",
+                        800,
+                        2,
+                        "https://klarta.pl/wp-content/uploads/2023/03/klarta-humea-grande-white-nalewanie-wody_11zon.webp",
                         ProductType.AIR_PURIFIER,
                         agd
                 )
+
         );
 
         productRepository.saveAll(products);

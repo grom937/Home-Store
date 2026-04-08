@@ -28,7 +28,56 @@ export class ProductManageComponent implements OnInit {
 
   productTypes = [
     { value: 'LIVING_ROOM_SOFA', label: 'Sofa do salonu' },
-    { value: 'TELEVISION', label: 'Telewizor' }
+    { value: 'LIVING_ROOM_COFFEE_TABLE', label: 'Stolik kawowy do salonu' },
+    { value: 'LIVING_ROOM_BOOKCASE', label: 'Regał do salonu' },
+    { value: 'LIVING_ROOM_ARMCHAIR', label: 'Fotel do salonu' },
+
+    { value: 'BEDROOM_BED', label: 'Łóżko do sypialni' },
+    { value: 'BEDROOM_WARDROBE', label: 'Szafa do sypialni' },
+    { value: 'BEDROOM_CHEST_OF_DRAWERS', label: 'Komoda do sypialni' },
+    { value: 'BEDROOM_NIGHT_STAND', label: 'Szafka nocna' },
+
+    { value: 'KITCHEN_TABLE', label: 'Stół kuchenny' },
+    { value: 'KITCHEN_CHAIR', label: 'Krzesło kuchenne' },
+    { value: 'KITCHEN_SINK', label: 'Zlew kuchenny' },
+    { value: 'KITCHEN_CABINET', label: 'Szafka kuchenna' },
+    { value: 'KITCHEN_BAR_STOOL', label: 'Hoker kuchenny' },
+
+    { value: 'BATHROOM_SINK_CABINET', label: 'Szafka pod umywalkę' },
+    { value: 'BATHROOM_BATH', label: 'Wanna' },
+    { value: 'BATHROOM_STORAGE_CABINET', label: 'Szafka łazienkowa' },
+    { value: 'BATHROOM_SHELF', label: 'Półka łazienkowa' },
+    { value: 'BATHROOM_LAUNDRY_BASKET', label: 'Kosz na pranie' },
+
+    { value: 'OFFICE_DESK', label: 'Biurko' },
+    { value: 'OFFICE_CHAIR', label: 'Krzesło biurowe' },
+    { value: 'OFFICE_BOOKCASE', label: 'Regał biurowy' },
+    { value: 'OFFICE_FILE_CABINET', label: 'Szafka na dokumenty' },
+
+    { value: 'HALLWAY_SHOE_CABINET', label: 'Szafka na buty' },
+    { value: 'HALLWAY_COAT_RACK', label: 'Wieszak do przedpokoju' },
+    { value: 'HALLWAY_BENCH', label: 'Ławka do przedpokoju' },
+    { value: 'HALLWAY_MIRROR', label: 'Lustro do przedpokoju' },
+
+    { value: 'TELEVISION', label: 'Telewizor' },
+    { value: 'SOUND_SYSTEM', label: 'System audio' },
+    { value: 'HOME_THEATER', label: 'Kino domowe' },
+    { value: 'MEDIA_PLAYER', label: 'Odtwarzacz multimedialny' },
+    { value: 'GAME_CONSOLE', label: 'Konsola do gier' },
+
+    { value: 'REFRIGERATOR', label: 'Lodówka' },
+    { value: 'DISHWASHER', label: 'Zmywarka' },
+    { value: 'WASHING_MACHINE', label: 'Pralka' },
+    { value: 'DRYER', label: 'Suszarka' },
+    { value: 'OVEN', label: 'Piekarnik' },
+    { value: 'MICROWAVE', label: 'Mikrofalówka' },
+    { value: 'COFFEE_MACHINE', label: 'Ekspres do kawy' },
+    { value: 'KETTLE', label: 'Czajnik' },
+    { value: 'TOASTER', label: 'Toster' },
+    { value: 'BLENDER', label: 'Blender' },
+    { value: 'VACUUM_CLEANER', label: 'Odkurzacz' },
+    { value: 'IRON', label: 'Żelazko' },
+    { value: 'AIR_PURIFIER', label: 'Oczyszczacz powietrza' }
   ];
 
   productForm: ReturnType<FormBuilder['group']>;
@@ -142,8 +191,12 @@ export class ProductManageComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '420px',
+      maxWidth: '95vw',
+      autoFocus: false,
+      restoreFocus: false,
       data: {
-        message: 'Czy na pewno chcesz usunąć produkt?'
+        message: 'Czy na pewno chcesz usunąć ten produkt? Tej operacji nie można cofnąć.'
       }
     });
 
