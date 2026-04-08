@@ -1,12 +1,64 @@
-<section class="home">
-  <div class="hero">
-    <h1>Witaj w Home Store</h1>
-    <p>
-      Katalog produktów
-    </p>
+<div class="home-layout">
+  <aside class="categories-sidebar">
+    <h2>Kategorie</h2>
 
-    <a routerLink="/products" class="button-link">
-      Przejdź do produktów
-    </a>
-  </div>
-</section>
+    <div *ngIf="loadingCategories" class="info-box">
+      Ładowanie kategorii...
+    </div>
+
+    <ul *ngIf="!loadingCategories && categories.length > 0" class="categories-list">
+      <li
+        *ngFor="let category of categories"
+        (click)="goToCategory(category.id)"
+        [class.active]="selectedCategoryId === category.id"
+      >
+        {{ category.name }}
+      </li>
+
+      <li (click)="goToCategory(null)" class="clear">
+        Wszystkie
+      </li>
+    </ul>
+
+    <div *ngIf="!loadingCategories && categories.length === 0" class="info-box">
+      Brak kategorii
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <section class="hero">
+      <h1>Witaj w Home Store</h1>
+      <p>Sprawdź losowe produkty z naszego katalogu.</p>
+    </section>
+
+    <section class="products-section">
+      <h2>Polecane produkty</h2>
+
+      <div *ngIf="loadingProducts" class="info-box">
+        Ładowanie produktów...
+      </div>
+
+      <div *ngIf="!loadingProducts && featuredProducts.length > 0" class="products-grid">
+        <article class="product-card" *ngFor="let product of featuredProducts; trackBy: trackByProductId">
+          <div class="product-image">
+            <img [src]="product.imageUrl || 'https://via.placeholder.com/300x200?text=Brak+zdjęcia'" [alt]="product.name">
+          </div>
+
+          <div class="product-body">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <div class="price">{{ product.price }} zł</div>
+
+            <a class="details-link" [routerLink]="['/products', product.id]">
+              Zobacz szczegóły
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div *ngIf="!loadingProducts && featuredProducts.length === 0" class="info-box">
+        Brak produktów do wyświetlenia
+      </div>
+    </section>
+  </main>
+</div>
