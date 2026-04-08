@@ -1,29 +1,29 @@
 <nav class="navbar">
   <div class="navbar-content">
-    <a routerLink="/" class="logo">Home Store</a>
+    <a class="logo" (click)="navigateTo('/')">Home Store</a>
 
     <div class="nav-links">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a (click)="navigateTo('/')">
         Strona główna
       </a>
 
-      <a routerLink="/products" routerLinkActive="active">
+      <a (click)="navigateTo('/products')">
         Produkty
       </a>
 
-      <a *ngIf="!authService.isLoggedIn()" routerLink="/register" routerLinkActive="active">
+      <a *ngIf="!authService.isLoggedIn()" (click)="navigateTo('/register')">
         Rejestracja
       </a>
 
-      <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">
+      <a *ngIf="!authService.isLoggedIn()" (click)="navigateTo('/login')">
         Logowanie
       </a>
 
-      <a *ngIf="authService.isAdmin()" routerLink="/admin/products" routerLinkActive="active">
+      <a *ngIf="authService.isAdmin()" (click)="navigateTo('/admin/products')">
         Zarządzanie produktami
       </a>
 
-      <a *ngIf="authService.isAdmin()" routerLink="/admin/orders" routerLinkActive="active">
+      <a *ngIf="authService.isAdmin()" (click)="navigateTo('/admin/orders')">
         Zarządzanie zamówieniami
       </a>
 
