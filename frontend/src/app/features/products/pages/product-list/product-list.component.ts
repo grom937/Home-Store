@@ -38,11 +38,11 @@ export class ProductListComponent implements OnInit {
             this.products = data;
           }
 
-          this.loading = false; // 🔥 KLUCZOWE
+          this.loading = false;
         },
         error: (err) => {
           console.error(err);
-          this.loading = false; // 🔥 też ważne
+          this.loading = false;
         }
       });
     });
