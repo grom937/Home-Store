@@ -33,6 +33,18 @@ export const routes: Routes = [
         .then(m => m.LoginComponent)
   },
   {
+    path: 'cart',
+    loadComponent: () =>
+      import('./features/cart/pages/cart/cart.component')
+        .then(m => m.CartComponent)
+  },
+  {
+    path: 'orders',
+    loadComponent: () =>
+      import('./features/orders/pages/order-history/order-history.component')
+        .then(m => m.OrderHistoryComponent)
+  },
+  {
     path: 'admin/products',
     canActivate: [adminGuard],
     loadComponent: () =>
