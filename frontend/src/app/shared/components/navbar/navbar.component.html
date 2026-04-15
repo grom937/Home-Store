@@ -11,6 +11,14 @@
         Produkty
       </a>
 
+      <a *ngIf="authService.isLoggedIn()" (click)="navigateTo('/cart')">
+        Koszyk
+      </a>
+
+      <a *ngIf="authService.isLoggedIn() && !authService.isAdmin()" (click)="navigateTo('/orders')">
+        Moje zamówienia
+      </a>
+
       <a *ngIf="!authService.isLoggedIn()" (click)="navigateTo('/register')">
         Rejestracja
       </a>

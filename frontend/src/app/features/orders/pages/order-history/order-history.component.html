@@ -1,34 +1,19 @@
-<section class="order-manage-page">
-  <h1>Zarządzanie zamówieniami</h1>
+<section class="orders-page">
+  <h1>Moje zamówienia</h1>
 
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
   <p *ngIf="loading">Ładowanie zamówień...</p>
 
   <div *ngIf="!loading && orders.length === 0" class="empty-state">
-    Brak zamówień do wyświetlenia.
+    Nie masz jeszcze żadnych zamówień.
   </div>
 
   <div class="orders-list" *ngIf="!loading && orders.length > 0">
     <article class="order-card" *ngFor="let order of orders">
       <h2>Zamówienie {{ order.orderId }}</h2>
-      <p>Użytkownik: {{ order.userEmail }}</p>
       <p>Data: {{ order.createdAt | date:'dd.MM.yyyy HH:mm' }}</p>
+      <p>Status: <strong>{{ order.status }}</strong></p>
       <p>Kwota: <strong>{{ order.totalAmount | currency:'PLN' }}</strong></p>
-
-      <div class="status-row">
-        <label>Status:</label>
-
-        <select [(ngModel)]="order.status">
-          <option *ngFor="let status of statuses" [ngValue]="status">
-            {{ status }}
-          </option>
-        </select>
-
-        <button type="button" (click)="updateStatus(order.orderId, order.status)">
-          Zapisz status
-        </button>
-      </div>
 
       <div class="order-items">
         <div class="order-item" *ngFor="let item of order.items">

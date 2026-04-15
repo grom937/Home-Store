@@ -6,9 +6,13 @@
       Ładowanie kategorii...
     </div>
 
-    <ul *ngIf="!loadingCategories && categories.length > 0" class="categories-list">
+    <div *ngIf="!loadingCategories && categoriesError" class="info-box error-box">
+      {{ categoriesError }}
+    </div>
+
+    <ul *ngIf="!loadingCategories && !categoriesError && categories.length > 0" class="categories-list">
       <li
-        *ngFor="let category of categories"
+        *ngFor="let category of categories; trackBy: trackByCategoryId"
         (click)="goToCategory(category.id)"
         [class.active]="selectedCategoryId === category.id"
       >
@@ -20,7 +24,7 @@
       </li>
     </ul>
 
-    <div *ngIf="!loadingCategories && categories.length === 0" class="info-box">
+    <div *ngIf="!loadingCategories && !categoriesError && categories.length === 0" class="info-box">
       Brak kategorii
     </div>
   </aside>
@@ -38,7 +42,11 @@
         Ładowanie produktów...
       </div>
 
-      <div *ngIf="!loadingProducts && featuredProducts.length > 0" class="products-grid">
+      <div *ngIf="!loadingProducts && productsError" class="info-box error-box">
+        {{ productsError }}
+      </div>
+
+      <div *ngIf="!loadingProducts && !productsError && featuredProducts.length > 0" class="products-grid">
         <article class="product-card" *ngFor="let product of featuredProducts; trackBy: trackByProductId">
           <div class="product-image">
             <img [src]="product.imageUrl || 'https://via.placeholder.com/300x200?text=Brak+zdjęcia'" [alt]="product.name">
@@ -56,7 +64,7 @@
         </article>
       </div>
 
-      <div *ngIf="!loadingProducts && featuredProducts.length === 0" class="info-box">
+      <div *ngIf="!loadingProducts && !productsError && featuredProducts.length === 0" class="info-box">
         Brak produktów do wyświetlenia
       </div>
     </section>

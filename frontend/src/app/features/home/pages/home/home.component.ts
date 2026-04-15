@@ -5,7 +5,6 @@ import { Category } from '../../../../core/models/category.model';
 import { Product } from '../../../../core/models/product.model';
 import { CategoryService } from '../../../../core/services/category.service';
 import { ProductService } from '../../../../core/services/product.service';
-
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,6 +19,9 @@ export class HomeComponent implements OnInit {
   featuredProducts: Product[] = [];
   loadingProducts = true;
   loadingCategories = true;
+
+  categoriesError = '';
+  productsError = '';
 
   selectedCategoryId: string | null = null;
   allProducts: Product[] = [];
@@ -36,26 +38,34 @@ export class HomeComponent implements OnInit {
   }
 
   loadCategories(): void {
+    this.categoriesError = '';
+
     this.categoryService.getCategories().subscribe({
       next: (data) => {
         this.categories = data;
         this.loadingCategories = false;
       },
-      error: () => {
+      error: (error) => {
+        console.error('Błąd ładowania kategorii:', error);
         this.categories = [];
+        this.categoriesError = 'Nie udało się pobrać kategorii z backendu.';
         this.loadingCategories = false;
       }
     });
   }
 
   loadProducts(): void {
+    this.productsError = '';
+
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.allProducts = data;
         this.featuredProducts = this.pickRandomProducts(data, 4);
         this.loadingProducts = false;
       },
-      error: () => {
+      error: (error) => {
+        console.error('Błąd ładowania produktów:', error);
+        this.productsError = 'Nie udało się pobrać produktów z backendu.';
         this.loadingProducts = false;
       }
     });
@@ -73,6 +83,8 @@ export class HomeComponent implements OnInit {
   }
 
   goToCategory(categoryId: string | null): void {
+    this.selectedCategoryId = categoryId;
+
     if (categoryId) {
       this.router.navigate(['/products'], {
         queryParams: { categoryId }
@@ -89,20 +101,4 @@ export class HomeComponent implements OnInit {
   trackByProductId(index: number, product: Product): string {
     return product.id!;
   }
-
-  filterByCategory(categoryId: string | null): void {
-    this.selectedCategoryId = categoryId;
-
-    if (!categoryId) {
-      this.featuredProducts = this.pickRandomProducts(this.allProducts, 4);
-      return;
-    }
-
-    const filtered = this.allProducts.filter(
-      product => product.categoryId === categoryId
-    );
-
-    this.featuredProducts = filtered.slice(0, 4);
-  }
-
 }

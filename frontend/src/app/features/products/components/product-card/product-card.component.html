@@ -1,7 +1,7 @@
-<div class="product-card">
+<article class="product-card">
   <div class="image-wrapper">
     <img
-      [src]="product.imageUrl || 'https://via.placeholder.com/600x400?text=Brak+zdjecia'"
+      [src]="product.imageUrl || 'https://via.placeholder.com/400x260?text=Brak+zdjecia'"
       [alt]="product.name"
       class="product-image"
     />
@@ -14,10 +14,12 @@
       {{ product.description || 'Brak opisu produktu.' }}
     </p>
 
-    <p class="price">{{ product.price | currency:'PLN' }}</p>
+    <p class="price">
+      {{ product.price | currency:'PLN' }}
+    </p>
 
-    <a [routerLink]="['/products', product.id]" class="details-button">
+    <a class="details-button" [routerLink]="['/products', product.id]">
       Zobacz szczegóły
     </a>
   </div>
-</div>
+</article>

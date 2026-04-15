@@ -27,6 +27,22 @@
       </p>
       <p class="price">{{ product.price | currency:'PLN' }}</p>
       <p class="quantity">Dostępna ilość: {{ product.quantity }}</p>
+
+      <div class="quantity-box">
+        <label for="selectedQuantity">Ilość:</label>
+        <input
+          id="selectedQuantity"
+          type="number"
+          min="1"
+          [(ngModel)]="selectedQuantity"
+        />
+      </div>
+
+      <button type="button" class="add-to-cart-button" (click)="addToCart()">
+        Dodaj do koszyka
+      </button>
+
+      <p class="cart-message" *ngIf="cartMessage">{{ cartMessage }}</p>
     </div>
   </div>
 </section>

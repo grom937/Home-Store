@@ -1,4 +1,4 @@
-.order-manage-page h1 {
+.orders-page h1 {
   margin-bottom: 24px;
 }
 
@@ -26,29 +26,8 @@
   word-break: break-word;
 }
 
-.status-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 16px 0;
-}
-
-.status-row select,
-.status-row button {
-  border-radius: 10px;
-  padding: 10px 12px;
-}
-
-.status-row button {
-  border: none;
-  background: #2563eb;
-  color: #ffffff;
-  cursor: pointer;
-  font-weight: 700;
-}
-
 .order-items {
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -66,8 +45,4 @@
   .order-item {
     grid-template-columns: 1fr;
   }
-}
-
-.success {
-  color: #15803d;
 }
