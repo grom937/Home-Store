@@ -1,9 +1,10 @@
+<a routerLink="/" class="top-back-link">← Strona główna</a>
 <section class="manage-page">
   <h1>Panel zarządzania produktami</h1>
 
   <div class="manage-layout">
     <div class="form-card">
-      <h2>Dodaj nowy produkt</h2>
+      <h2>{{ editingProductId ? 'Edytuj produkt' : 'Dodaj nowy produkt' }}</h2>
 
       <form [formGroup]="productForm" class="product-form">
         <div class="form-group">
@@ -88,9 +89,15 @@
           </div>
         </div>
 
-        <button type="button" class="primary-button" (click)="addProduct()" [disabled]="productForm.invalid">
-          Dodaj produkt
-        </button>
+        <div class="action-row">
+          <button type="button" class="primary-button" (click)="submitForm()" [disabled]="productForm.invalid">
+            {{ editingProductId ? 'Zapisz zmiany' : 'Dodaj produkt' }}
+          </button>
+
+          <button *ngIf="editingProductId" type="button" class="secondary-button" (click)="cancelEdit()">
+            Anuluj edycję
+          </button>
+        </div>
       </form>
     </div>
   </div>
@@ -98,14 +105,23 @@
   <hr />
 
   <section class="products-section">
-    <h2>Lista produktów</h2>
+    <div class="products-header">
+      <h2>Lista produktów</h2>
 
-    <div *ngIf="products.length === 0" class="empty-state">
+      <input
+        class="search-input"
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="applySearch()"
+        placeholder="Wyszukaj produkt po nazwie lub opisie" />
+    </div>
+
+    <div *ngIf="filteredProducts.length === 0" class="empty-state">
       Brak produktów do wyświetlenia.
     </div>
 
-    <div class="products-grid" *ngIf="products.length > 0">
-      <article class="product-card" *ngFor="let product of products">
+    <div class="products-grid" *ngIf="filteredProducts.length > 0">
+      <article class="product-card" *ngFor="let product of filteredProducts">
         <div class="product-image-wrapper">
           <img
             [src]="product.imageUrl || 'https://via.placeholder.com/400x250?text=Brak+zdjecia'"
@@ -125,9 +141,15 @@
           <p><strong>Typ:</strong> {{ getProductTypeLabel(product.productType) }}</p>
           <p><strong>Kategoria:</strong> {{ getCategoryName(product.categoryId) }}</p>
 
-          <button class="delete-button" (click)="deleteProduct(product.id)">
-            Usuń
-          </button>
+          <div class="card-actions">
+            <button class="edit-button" (click)="startEdit(product)">
+              Edytuj
+            </button>
+
+            <button class="delete-button" (click)="deleteProduct(product.id)">
+              Usuń
+            </button>
+          </div>
         </div>
       </article>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { OrderService } from '../../../../core/services/order.service';
 import { Order } from '../../../../core/models/order.model';
@@ -8,7 +9,7 @@ import { Order } from '../../../../core/models/order.model';
 @Component({
   selector: 'app-order-manage',
   standalone: true,
-  imports: [CommonModule, NgIf, CurrencyPipe, DatePipe, FormsModule],
+  imports: [CommonModule, NgIf, CurrencyPipe, DatePipe, FormsModule, RouterLink],
   templateUrl: './order-manage.component.html',
   styleUrl: './order-manage.component.css'
 })

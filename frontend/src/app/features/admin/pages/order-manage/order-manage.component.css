@@ -71,3 +71,15 @@
 .success {
   color: #15803d;
 }
+
+.top-back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.top-back-link:hover {
+  text-decoration: underline;
+}

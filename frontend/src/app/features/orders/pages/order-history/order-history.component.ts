@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import { OrderService } from '../../../../core/services/order.service';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -8,7 +9,7 @@ import { Order } from '../../../../core/models/order.model';
 @Component({
   selector: 'app-order-history',
   standalone: true,
-  imports: [CommonModule, NgIf, CurrencyPipe, DatePipe],
+  imports: [CommonModule, NgIf, CurrencyPipe, DatePipe, RouterLink],
   templateUrl: './order-history.component.html',
   styleUrl: './order-history.component.css'
 })

@@ -268,7 +268,7 @@ public class DataInitializer implements CommandLineRunner {
                         hallway
                 ),
                 product(
-                        "Wieszak Hall",
+                        "Wieszak Edie Hall",
                         "Stojący wieszak na kurtki i płaszcze.",
                         229,
                         13,

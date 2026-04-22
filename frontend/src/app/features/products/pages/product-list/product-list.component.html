@@ -5,6 +5,50 @@
 <section class="product-list-page">
   <h1>Lista produktów</h1>
 
+  <div class="filters-card">
+    <div class="filters-grid">
+      <div class="filter-group">
+        <label for="search">Wyszukaj</label>
+        <input
+          id="search"
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="applyFilters()"
+          placeholder="Wpisz nazwę lub opis produktu" />
+      </div>
+
+      <div class="filter-group">
+        <label for="category">Kategoria</label>
+        <select
+          id="category"
+          [(ngModel)]="selectedCategoryId"
+          (change)="applyFilters()">
+          <option value="">Wszystkie</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="productType">Typ produktu</label>
+        <select
+          id="productType"
+          [(ngModel)]="selectedProductType"
+          (change)="applyFilters()">
+          <option value="">Wszystkie</option>
+          <option *ngFor="let type of productTypes" [value]="type.value">
+            {{ type.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <button class="clear-button" type="button" (click)="clearFilters()">
+      Wyczyść filtry
+    </button>
+  </div>
+
   <p *ngIf="loading" class="info-message">
     Ładowanie produktów...
   </p>
@@ -13,13 +57,13 @@
     {{ error }}
   </p>
 
-  <div *ngIf="!loading && !error && products.length === 0" class="info-message">
+  <div *ngIf="!loading && !error && filteredProducts.length === 0" class="info-message">
     Brak produktów do wyświetlenia.
   </div>
 
-  <div *ngIf="!loading && !error && products.length > 0" class="product-grid">
+  <div *ngIf="!loading && !error && filteredProducts.length > 0" class="product-grid">
     <app-product-card
-      *ngFor="let product of products"
+      *ngFor="let product of filteredProducts"
       [product]="product">
     </app-product-card>
   </div>

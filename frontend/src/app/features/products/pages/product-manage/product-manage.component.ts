@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
@@ -17,14 +18,20 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
     CommonModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    RouterLink,
+    FormsModule
   ],
   templateUrl: './product-manage.component.html',
   styleUrl: './product-manage.component.css'
 })
 export class ProductManageComponent implements OnInit {
   products: Product[] = [];
+  filteredProducts: Product[] = [];
   categories: Category[] = [];
+
+  editingProductId: string | null = null;
+  searchTerm = '';
 
   productTypes = [
     { value: 'LIVING_ROOM_SOFA', label: 'Sofa do salonu' },
@@ -128,6 +135,7 @@ export class ProductManageComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
+        this.applySearch();
       },
       error: () => {
         this.snackBar.open('Błąd ładowania produktów', 'OK', {
@@ -137,7 +145,17 @@ export class ProductManageComponent implements OnInit {
     });
   }
 
-  addProduct(): void {
+  applySearch(): void {
+    const search = this.searchTerm.trim().toLowerCase();
+
+    this.filteredProducts = this.products.filter(product =>
+      !search ||
+      product.name.toLowerCase().includes(search) ||
+      (product.description ?? '').toLowerCase().includes(search)
+    );
+  }
+
+  submitForm(): void {
     if (this.productForm.invalid) {
       this.productForm.markAllAsTouched();
 
@@ -149,7 +167,7 @@ export class ProductManageComponent implements OnInit {
 
     const formValue = this.productForm.getRawValue();
 
-    const productToCreate = {
+    const productPayload = {
       name: formValue.name?.trim() ?? '',
       description: formValue.description?.trim() || '',
       price: Number(formValue.price),
@@ -159,29 +177,73 @@ export class ProductManageComponent implements OnInit {
       categoryId: formValue.categoryId ?? ''
     };
 
-    this.productService.create(productToCreate).subscribe({
+    if (this.editingProductId) {
+      this.productService.update(this.editingProductId, productPayload).subscribe({
+        next: () => {
+          this.snackBar.open('Produkt został zaktualizowany', 'OK', {
+            duration: 3000
+          });
+
+          this.cancelEdit();
+          this.loadProducts();
+        },
+        error: () => {
+          this.snackBar.open('Błąd aktualizacji produktu', 'OK', {
+            duration: 3000
+          });
+        }
+      });
+
+      return;
+    }
+
+    this.productService.create(productPayload).subscribe({
       next: () => {
         this.snackBar.open('Produkt został dodany', 'OK', {
           duration: 3000
         });
 
+        this.resetForm();
         this.loadProducts();
-
-        this.productForm.reset({
-          name: '',
-          description: '',
-          price: null,
-          quantity: 0,
-          imageUrl: '',
-          productType: 'LIVING_ROOM_SOFA',
-          categoryId: this.categories.length > 0 ? this.categories[0].id : ''
-        });
       },
       error: () => {
         this.snackBar.open('Błąd dodawania produktu', 'OK', {
           duration: 3000
         });
       }
+    });
+  }
+
+  startEdit(product: Product): void {
+    this.editingProductId = product.id ?? null;
+
+    this.productForm.patchValue({
+      name: product.name,
+      description: product.description ?? '',
+      price: product.price,
+      quantity: product.quantity,
+      imageUrl: product.imageUrl ?? '',
+      productType: product.productType,
+      categoryId: product.categoryId
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  cancelEdit(): void {
+    this.editingProductId = null;
+    this.resetForm();
+  }
+
+  resetForm(): void {
+    this.productForm.reset({
+      name: '',
+      description: '',
+      price: null,
+      quantity: 0,
+      imageUrl: '',
+      productType: 'LIVING_ROOM_SOFA',
+      categoryId: this.categories.length > 0 ? this.categories[0].id : ''
     });
   }
 

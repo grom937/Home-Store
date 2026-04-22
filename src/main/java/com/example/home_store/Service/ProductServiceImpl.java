@@ -45,6 +45,25 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductDto update(UUID id, ProductDto dto) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        Category category = categoryRepository.findById(dto.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        existingProduct.setName(dto.getName());
+        existingProduct.setDescription(dto.getDescription());
+        existingProduct.setPrice(dto.getPrice());
+        existingProduct.setQuantity(dto.getQuantity());
+        existingProduct.setImageUrl(dto.getImageUrl());
+        existingProduct.setProductType(dto.getProductType());
+        existingProduct.setCategory(category);
+
+        return mapper.toDto(productRepository.save(existingProduct));
+    }
+
+    @Override
     public void delete(UUID id) {
         productRepository.deleteById(id);
     }

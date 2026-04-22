@@ -42,6 +42,12 @@ public class ProductController {
         return ResponseEntity.ok(service.getById(id));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDto> update(@PathVariable UUID id, @Valid @RequestBody ProductDto dto) {
+        log.info("Odebrano żądanie aktualizacji produktu o ID: {}", id);
+        return ResponseEntity.ok(service.update(id, dto));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         log.warn("Odebrano żądanie usunięcia produktu o ID: {}", id);
