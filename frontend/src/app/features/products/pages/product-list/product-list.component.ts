@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Product } from '../../../../core/models/product.model';
 import { Category } from '../../../../core/models/category.model';
@@ -30,6 +30,9 @@ export class ProductListComponent implements OnInit {
   searchTerm = '';
   selectedCategoryId = '';
   selectedProductType = '';
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
+  sortOption = '';
 
   productTypes = [
     { value: 'LIVING_ROOM_SOFA', label: 'Sofa do salonu' },
@@ -135,7 +138,7 @@ export class ProductListComponent implements OnInit {
   applyFilters(): void {
     const search = this.searchTerm.trim().toLowerCase();
 
-    this.filteredProducts = this.products.filter(product => {
+    let result = this.products.filter(product => {
       const matchesSearch =
         !search ||
         product.name.toLowerCase().includes(search) ||
@@ -149,14 +152,33 @@ export class ProductListComponent implements OnInit {
         !this.selectedProductType ||
         product.productType === this.selectedProductType;
 
-      return matchesSearch && matchesCategory && matchesType;
+      const matchesMinPrice =
+        this.minPrice === null || this.minPrice === undefined || product.price >= this.minPrice;
+
+      const matchesMaxPrice =
+        this.maxPrice === null || this.maxPrice === undefined || product.price <= this.maxPrice;
+
+      return matchesSearch && matchesCategory && matchesType && matchesMinPrice && matchesMaxPrice;
     });
+
+    if (this.sortOption === 'price-asc') {
+      result = [...result].sort((a, b) => a.price - b.price);
+    }
+
+    if (this.sortOption === 'price-desc') {
+      result = [...result].sort((a, b) => b.price - a.price);
+    }
+
+    this.filteredProducts = result;
   }
 
   clearFilters(): void {
     this.searchTerm = '';
     this.selectedCategoryId = '';
     this.selectedProductType = '';
+    this.minPrice = null;
+    this.maxPrice = null;
+    this.sortOption = '';
     this.applyFilters();
   }
 }

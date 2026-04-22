@@ -42,6 +42,40 @@
           </option>
         </select>
       </div>
+
+      <div class="filter-group">
+        <label for="minPrice">Cena od</label>
+        <input
+          id="minPrice"
+          type="number"
+          min="0"
+          [(ngModel)]="minPrice"
+          (input)="applyFilters()"
+          placeholder="Np. 500" />
+      </div>
+
+      <div class="filter-group">
+        <label for="maxPrice">Cena do</label>
+        <input
+          id="maxPrice"
+          type="number"
+          min="0"
+          [(ngModel)]="maxPrice"
+          (input)="applyFilters()"
+          placeholder="Np. 2000" />
+      </div>
+
+      <div class="filter-group">
+        <label for="sort">Sortowanie</label>
+        <select
+          id="sort"
+          [(ngModel)]="sortOption"
+          (change)="applyFilters()">
+          <option value="">Domyślne</option>
+          <option value="price-asc">Cena rosnąco</option>
+          <option value="price-desc">Cena malejąco</option>
+        </select>
+      </div>
     </div>
 
     <button class="clear-button" type="button" (click)="clearFilters()">
