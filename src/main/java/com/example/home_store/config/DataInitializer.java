@@ -87,7 +87,7 @@ public class DataInitializer implements CommandLineRunner {
                         "Miękki fotel wypoczynkowy idealny do czytania i odpoczynku.",
                         1099,
                         5,
-                        "https://meblemakarowski.pl/img/cms/BLOG2/fotel-rozkladany-z-podnozkiem-spencer-szary-sztruksowy-nowoczesny.jpg",
+                        "https://www.megismeble.pl/img/products/11/23/89/8_max.jpg",
                         ProductType.LIVING_ROOM_ARMCHAIR,
                         livingRoom
                 ),
