@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
 import { Category } from '../../../../core/models/category.model';
 import { Product } from '../../../../core/models/product.model';
 import { CategoryService } from '../../../../core/services/category.service';
 import { ProductService } from '../../../../core/services/product.service';
-import { Router } from '@angular/router';
+import { LanguageService } from '../../../../core/services/language.service';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    public languageService: LanguageService
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +50,7 @@ export class HomeComponent implements OnInit {
       error: (error) => {
         console.error('Błąd ładowania kategorii:', error);
         this.categories = [];
-        this.categoriesError = 'Nie udało się pobrać kategorii z backendu.';
+        this.categoriesError = this.languageService.t('categoryError');
         this.loadingCategories = false;
       }
     });
@@ -65,7 +67,7 @@ export class HomeComponent implements OnInit {
       },
       error: (error) => {
         console.error('Błąd ładowania produktów:', error);
-        this.productsError = 'Nie udało się pobrać produktów z backendu.';
+        this.productsError = this.languageService.t('productsError');
         this.loadingProducts = false;
       }
     });

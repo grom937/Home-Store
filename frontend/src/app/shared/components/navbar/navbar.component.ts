@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { AuthService } from '../../../core/services/auth.service';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class NavbarComponent {
   constructor(
     public authService: AuthService,
+    public languageService: LanguageService,
     private router: Router,
     private dialog: MatDialog
   ) {}

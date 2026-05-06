@@ -8,7 +8,7 @@ import { Category } from '../../../../core/models/category.model';
 import { ProductService } from '../../../../core/services/product.service';
 import { CategoryService } from '../../../../core/services/category.service';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
-
+import { LanguageService } from '../../../../core/services/language.service';
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -19,6 +19,7 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 export class ProductListComponent implements OnInit {
   private productService = inject(ProductService);
   private categoryService = inject(CategoryService);
+  public languageService = inject(LanguageService);
 
   products: Product[] = [];
   filteredProducts: Product[] = [];

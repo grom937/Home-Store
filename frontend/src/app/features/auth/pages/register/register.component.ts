@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../../core/services/auth.service';
 
@@ -22,7 +22,8 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -54,10 +55,11 @@ export class RegisterComponent {
       password: formValue.password ?? '',
       confirmPassword: formValue.confirmPassword ?? ''
     }).subscribe({
-      next: (response) => {
-        this.successMessage = response.message || 'Konto zostało utworzone.';
+      next: () => {
+        this.successMessage = 'Konto zostało utworzone.';
         this.registerForm.reset();
         this.isSubmitting = false;
+        this.router.navigateByUrl('/account');
       },
       error: (error: HttpErrorResponse) => {
         this.errorMessage = error.error?.message || 'Wystąpił błąd podczas rejestracji.';

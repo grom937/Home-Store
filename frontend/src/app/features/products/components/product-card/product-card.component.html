@@ -2,24 +2,24 @@
   <div class="image-wrapper">
     <img
       [src]="product.imageUrl || 'https://via.placeholder.com/400x260?text=Brak+zdjecia'"
-      [alt]="product.name"
+      [alt]="languageService.productName(product.name)"
       class="product-image"
     />
   </div>
 
   <div class="product-content">
-    <h3>{{ product.name }}</h3>
+    <h3>{{ languageService.productName(product.name) }}</h3>
 
     <p class="description">
-      {{ product.description || 'Brak opisu produktu.' }}
+      {{ languageService.productDescription(product.description) || 'Brak opisu produktu.' }}
     </p>
 
     <p class="price">
-      {{ product.price | currency:'PLN' }}
+      PLN {{ product.price | number:'1.2-2' }}
     </p>
 
     <a class="details-button" [routerLink]="['/products', product.id]">
-      Zobacz szczegóły
+      {{ languageService.t('details') }}
     </a>
   </div>
 </article>

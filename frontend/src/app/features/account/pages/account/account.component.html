@@ -1,0 +1,41 @@
+<a routerLink="/" class="top-back-link">← {{ languageService.t('home') }}</a>
+
+<section class="account-page">
+  <div class="account-card" *ngIf="authService.getCurrentUser() as user">
+    <h1>{{ languageService.t('myAccount') }}</h1>
+
+    <p>
+      <strong>Email:</strong>
+      {{ user.email }}
+    </p>
+
+    <p>
+      <strong>{{ languageService.t('role') }}:</strong>
+      {{ user.role }}
+    </p>
+
+    <div class="account-actions">
+      <a routerLink="/cart" class="primary-link">
+        {{ languageService.t('cart') }}
+      </a>
+
+      <a *ngIf="!authService.isAdmin()" routerLink="/orders" class="secondary-link">
+        {{ languageService.t('myOrders') }}
+      </a>
+
+      <a *ngIf="authService.isAdmin()" routerLink="/admin/products" class="secondary-link">
+        {{ languageService.t('adminProducts') }}
+      </a>
+
+      <button type="button" class="logout-button" (click)="logout()">
+        {{ languageService.t('logout') }}
+      </button>
+    </div>
+  </div>
+
+  <div class="account-card" *ngIf="!authService.isLoggedIn()">
+    <h1>{{ languageService.t('myAccount') }}</h1>
+    <p>{{ languageService.t('loginRequired') }}</p>
+    <a routerLink="/login" class="primary-link">{{ languageService.t('login') }}</a>
+  </div>
+</section>

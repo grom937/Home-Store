@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final EmailService emailService;
+
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
@@ -47,6 +49,8 @@ public class AuthServiceImpl implements AuthService {
         user.setCart(cart);
 
         User savedUser = userRepository.save(user);
+
+        emailService.sendRegistrationConfirmation(savedUser);
 
         return RegisterResponseDto.builder()
                 .id(savedUser.getId())

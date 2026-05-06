@@ -32,6 +32,7 @@
 .filter-group input,
 .filter-group select {
   width: 100%;
+  box-sizing: border-box;
   padding: 12px 14px;
   border: 1px solid #d1d5db;
   border-radius: 10px;
@@ -61,8 +62,14 @@
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
   gap: 24px;
+  align-items: stretch;
+}
+
+.product-grid app-product-card {
+  display: block;
+  height: 100%;
 }
 
 .info-message {
@@ -96,8 +103,20 @@
   transform: translateY(-1px);
 }
 
+@media (max-width: 1100px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
   .filters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-grid {
     grid-template-columns: 1fr;
   }
 }

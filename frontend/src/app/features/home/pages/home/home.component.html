@@ -1,9 +1,9 @@
 <div class="home-layout">
   <aside class="categories-sidebar">
-    <h2>Kategorie</h2>
+    <h2>{{ languageService.t('categories') }}</h2>
 
     <div *ngIf="loadingCategories" class="info-box">
-      Ładowanie kategorii...
+      {{ languageService.t('loadingCategories') }}
     </div>
 
     <div *ngIf="!loadingCategories && categoriesError" class="info-box error-box">
@@ -16,30 +16,30 @@
         (click)="goToCategory(category.id)"
         [class.active]="selectedCategoryId === category.id"
       >
-        {{ category.name }}
+        {{ languageService.categoryName(category.name) }}
       </li>
 
       <li (click)="goToCategory(null)" class="clear">
-        Wszystkie
+        {{ languageService.t('all') }}
       </li>
     </ul>
 
     <div *ngIf="!loadingCategories && !categoriesError && categories.length === 0" class="info-box">
-      Brak kategorii
+      {{ languageService.t('noCategories') }}
     </div>
   </aside>
 
   <main class="main-content">
     <section class="hero">
-      <h1>Witaj w Home Store</h1>
-      <p>Sprawdź produkty z naszego katalogu.</p>
+      <h1>{{ languageService.t('welcome') }}</h1>
+      <p>{{ languageService.t('checkProducts') }}</p>
     </section>
 
     <section class="products-section">
-      <h2>Polecane produkty</h2>
+      <h2>{{ languageService.t('featuredProducts') }}</h2>
 
       <div *ngIf="loadingProducts" class="info-box">
-        Ładowanie produktów...
+        {{ languageService.t('loadingProducts') }}
       </div>
 
       <div *ngIf="!loadingProducts && productsError" class="info-box error-box">
@@ -49,23 +49,32 @@
       <div *ngIf="!loadingProducts && !productsError && featuredProducts.length > 0" class="products-grid">
         <article class="product-card" *ngFor="let product of featuredProducts; trackBy: trackByProductId">
           <div class="product-image">
-            <img [src]="product.imageUrl || 'https://via.placeholder.com/300x200?text=Brak+zdjęcia'" [alt]="product.name">
+            <img
+              [src]="product.imageUrl || 'https://via.placeholder.com/300x200?text=Brak+zdjecia'"
+              [alt]="languageService.productName(product.name)"
+            />
           </div>
 
           <div class="product-body">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.description }}</p>
-            <div class="price">{{ product.price }} zł</div>
+            <h3>{{ languageService.productName(product.name) }}</h3>
+
+            <p class="description">
+              {{ languageService.productDescription(product.description) }}
+            </p>
+
+            <div class="price">
+              PLN {{ product.price | number:'1.2-2' }}
+            </div>
 
             <a class="details-link" [routerLink]="['/products', product.id]">
-              Zobacz szczegóły
+              {{ languageService.t('details') }}
             </a>
           </div>
         </article>
       </div>
 
       <div *ngIf="!loadingProducts && !productsError && featuredProducts.length === 0" class="info-box">
-        Brak produktów do wyświetlenia
+        {{ languageService.t('noProducts') }}
       </div>
     </section>
   </main>

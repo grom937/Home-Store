@@ -18,7 +18,17 @@ export class AuthService {
   private storageKey = 'home_store_user';
 
   register(data: RegisterRequest): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.authUrl}/register`, data);
+    return this.http.post<RegisterResponse>(`${this.authUrl}/register`, data).pipe(
+      tap((response) => {
+        const user: AuthUser = {
+          id: response.id,
+          email: response.email,
+          role: response.role
+        };
+
+        localStorage.setItem(this.storageKey, JSON.stringify(user));
+      })
+    );
   }
 
   login(data: LoginRequest): Observable<LoginResponse> {

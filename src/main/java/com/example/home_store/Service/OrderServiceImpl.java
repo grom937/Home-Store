@@ -30,6 +30,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
     @Override
     public OrderDto createOrder(CreateOrderRequestDto dto) {
@@ -60,10 +61,12 @@ public class OrderServiceImpl implements OrderService {
             order.addItem(orderItem);
         }
 
-        Order savedOrder = orderRepository.save(order);
+        Order savedOrder = orderRepository.saveAndFlush(order);
 
         cart.getItems().clear();
         cartRepository.save(cart);
+
+        emailService.sendOrderConfirmation(savedOrder);
 
         return toDto(savedOrder);
     }

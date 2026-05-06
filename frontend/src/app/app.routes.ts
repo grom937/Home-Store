@@ -33,6 +33,12 @@ export const routes: Routes = [
         .then(m => m.LoginComponent)
   },
   {
+    path: 'account',
+    loadComponent: () =>
+      import('./features/account/pages/account/account.component')
+        .then(m => m.AccountComponent)
+  },
+  {
     path: 'cart',
     loadComponent: () =>
       import('./features/cart/pages/cart/cart.component')

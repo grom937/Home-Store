@@ -25,7 +25,7 @@
           (change)="applyFilters()">
           <option value="">Wszystkie</option>
           <option *ngFor="let category of categories" [value]="category.id">
-            {{ category.name }}
+            {{ languageService.categoryName(category.name) }}
           </option>
         </select>
       </div>

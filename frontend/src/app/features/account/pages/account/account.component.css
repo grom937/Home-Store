@@ -1,0 +1,64 @@
+.top-back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.top-back-link:hover {
+  text-decoration: underline;
+}
+
+.account-page {
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.account-card {
+  width: 100%;
+  max-width: 560px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.account-card h1 {
+  margin-top: 0;
+  color: #111827;
+}
+
+.account-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.primary-link,
+.secondary-link,
+.logout-button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary-link {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.secondary-link {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.logout-button {
+  background: #dc2626;
+  color: #ffffff;
+}

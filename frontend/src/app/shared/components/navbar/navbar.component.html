@@ -4,44 +4,66 @@
 
     <div class="nav-links">
       <a (click)="navigateTo('/')">
-        Strona główna
+        {{ languageService.t('home') }}
       </a>
 
       <a (click)="navigateTo('/products')">
-        Produkty
+        {{ languageService.t('products') }}
       </a>
 
       <a *ngIf="authService.isLoggedIn()" (click)="navigateTo('/cart')">
-        Koszyk
+        {{ languageService.t('cart') }}
       </a>
 
       <a *ngIf="authService.isLoggedIn() && !authService.isAdmin()" (click)="navigateTo('/orders')">
-        Moje zamówienia
+        {{ languageService.t('myOrders') }}
       </a>
 
-      <a *ngIf="!authService.isLoggedIn()" (click)="navigateTo('/register')">
-        Rejestracja
-      </a>
-
-      <a *ngIf="!authService.isLoggedIn()" (click)="navigateTo('/login')">
-        Logowanie
+      <a *ngIf="authService.isLoggedIn()" (click)="navigateTo('/account')">
+        {{ languageService.t('myAccount') }}
       </a>
 
       <a *ngIf="authService.isAdmin()" (click)="navigateTo('/admin/products')">
-        Zarządzanie produktami
+        {{ languageService.t('adminProducts') }}
       </a>
 
       <a *ngIf="authService.isAdmin()" (click)="navigateTo('/admin/orders')">
-        Zarządzanie zamówieniami
+        {{ languageService.t('adminOrders') }}
       </a>
 
+      <a *ngIf="!authService.isLoggedIn()" (click)="navigateTo('/register')">
+        {{ languageService.t('register') }}
+      </a>
+
+      <a *ngIf="!authService.isLoggedIn()" (click)="navigateTo('/login')">
+        {{ languageService.t('login') }}
+      </a>
+    </div>
+
+    <div class="right-section">
       <span *ngIf="authService.isLoggedIn()" class="user-info">
         {{ authService.getCurrentUser()?.email }}
       </span>
 
       <button *ngIf="authService.isLoggedIn()" class="logout-button" (click)="logout()">
-        Wyloguj
+        {{ languageService.t('logout') }}
       </button>
+
+      <div class="language-switcher">
+        <button
+          type="button"
+          [class.active]="languageService.currentLanguage === 'pl'"
+          (click)="languageService.setLanguage('pl')">
+          PL
+        </button>
+
+        <button
+          type="button"
+          [class.active]="languageService.currentLanguage === 'en'"
+          (click)="languageService.setLanguage('en')">
+          EN
+        </button>
+      </div>
     </div>
   </div>
 </nav>
