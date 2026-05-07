@@ -35,7 +35,48 @@ export class LanguageService {
       noCategories: 'Brak kategorii',
       categoryError: 'Nie udało się pobrać kategorii z backendu.',
       productsError: 'Nie udało się pobrać produktów z backendu.',
-      noDescription: 'Brak opisu produktu.'
+      noDescription: 'Brak opisu produktu.',
+      productList: 'Lista produktów',
+      search: 'Wyszukaj',
+      searchPlaceholder: 'Wpisz nazwę lub opis produktu',
+      category: 'Kategoria',
+      productType: 'Typ produktu',
+      priceFrom: 'Cena od',
+      priceTo: 'Cena do',
+      sort: 'Sortowanie',
+      defaultSort: 'Domyślne',
+      priceAsc: 'Cena rosnąco',
+      priceDesc: 'Cena malejąco',
+      clearFilters: 'Wyczyść filtry',
+      backHome: 'Strona główna',
+      backProducts: 'Wróć do produktów',
+      basket: 'Koszyk',
+      emptyCart: 'Twój koszyk jest pusty.',
+      goToProducts: 'Przejdź do produktów',
+      loadingCart: 'Ładowanie koszyka...',
+      cartLoadError: 'Nie udało się pobrać koszyka.',
+      cartQuantityError: 'Nie udało się zmienić ilości produktu.',
+      cartRemoveError: 'Nie udało się usunąć produktu z koszyka.',
+      cartClearError: 'Nie udało się wyczyścić koszyka.',
+      orderCreated: 'Zamówienie zostało złożone.',
+      orderCreateError: 'Nie udało się złożyć zamówienia.',
+      price: 'Cena',
+      value: 'Wartość',
+      removeFromCart: 'Usuń z koszyka',
+      summary: 'Podsumowanie',
+      productCount: 'Liczba produktów',
+      amount: 'Kwota',
+      placeOrder: 'Złóż zamówienie',
+      clearCart: 'Wyczyść koszyk',
+      myOrdersTitle: 'Moje zamówienia',
+      noOrders: 'Nie masz jeszcze żadnych zamówień.',
+      loadingOrders: 'Ładowanie zamówień...',
+      ordersLoadError: 'Nie udało się pobrać zamówień.',
+      order: 'Zamówienie',
+      date: 'Data',
+      status: 'Status',
+      pieces: 'szt.',
+      cartIncreaseError: 'Nie udało się zwiększyć ilości produktu.', cartDecreaseError: 'Nie udało się zmniejszyć ilości produktu.', cartItemRemoved: 'Produkt został usunięty z koszyka.', cartCleared: 'Koszyk został wyczyszczony.', placingOrder: 'Składanie...'
     },
     en: {
       home: 'Home',
@@ -62,7 +103,48 @@ export class LanguageService {
       noCategories: 'No categories',
       categoryError: 'Could not load categories from backend.',
       productsError: 'Could not load products from backend.',
-      noDescription: 'No product description.'
+      noDescription: 'No product description.',
+      productList: 'Product list',
+      search: 'Search',
+      searchPlaceholder: 'Enter product name or description',
+      category: 'Category',
+      productType: 'Product type',
+      priceFrom: 'Price from',
+      priceTo: 'Price to',
+      sort: 'Sort',
+      defaultSort: 'Default',
+      priceAsc: 'Price ascending',
+      priceDesc: 'Price descending',
+      clearFilters: 'Clear filters',
+      backHome: 'Home',
+      backProducts: 'Back to products',
+      basket: 'Cart',
+      emptyCart: 'Your cart is empty.',
+      goToProducts: 'Go to products',
+      loadingCart: 'Loading cart...',
+      cartLoadError: 'Could not load cart.',
+      cartQuantityError: 'Could not update product quantity.',
+      cartRemoveError: 'Could not remove product from cart.',
+      cartClearError: 'Could not clear cart.',
+      orderCreated: 'Order has been placed.',
+      orderCreateError: 'Could not place order.',
+      price: 'Price',
+      value: 'Value',
+      removeFromCart: 'Remove from cart',
+      summary: 'Summary',
+      productCount: 'Product count',
+      amount: 'Amount',
+      placeOrder: 'Place order',
+      clearCart: 'Clear cart',
+      myOrdersTitle: 'My orders',
+      noOrders: 'You do not have any orders yet.',
+      loadingOrders: 'Loading orders...',
+      ordersLoadError: 'Could not load orders.',
+      order: 'Order',
+      date: 'Date',
+      status: 'Status',
+      pieces: 'pcs.',
+      cartIncreaseError: 'Could not increase product quantity.', cartDecreaseError: 'Could not decrease product quantity.', cartItemRemoved: 'Product has been removed from cart.', cartCleared: 'Cart has been cleared.', placingOrder: 'Placing order...'
     }
   };
 
@@ -189,7 +271,7 @@ export class LanguageService {
 
     'Pojemna lodówka do nowoczesnej kuchni.': 'Spacious refrigerator for a modern kitchen.',
     'Zmywarka do codziennego użytku w domu.': 'Dishwasher for everyday home use.',
-    'Automatyczna pralka do domu i mieszkania.': 'Automatic washing machine for home and apartment use.',
+    'Automatyczna pralka do mieszkania.': 'Automatic washing machine for home and apartment use.',
     'Suszarka bębnowa oszczędzająca czas i miejsce.': 'Tumble dryer that saves time and space.',
     'Piekarnik do pieczenia i przygotowywania potraw.': 'Oven for baking and preparing meals.',
     'Kuchenka mikrofalowa do szybkiego podgrzewania dań.': 'Microwave oven for quickly heating meals.',
@@ -212,15 +294,33 @@ export class LanguageService {
   }
 
   setLanguage(language: Language): void {
+    if (this.currentLanguage === language) {
+      return;
+    }
+
     this.currentLanguage = language;
     localStorage.setItem(this.storageKey, language);
+
+    window.location.reload();
   }
 
   t(key: string): string {
+    const savedLanguage = localStorage.getItem(this.storageKey);
+
+    if (savedLanguage === 'pl' || savedLanguage === 'en') {
+      this.currentLanguage = savedLanguage;
+    }
+
     return this.translations[this.currentLanguage][key] ?? key;
   }
 
   categoryName(name: string): string {
+    const savedLanguage = localStorage.getItem(this.storageKey);
+
+    if (savedLanguage === 'pl' || savedLanguage === 'en') {
+      this.currentLanguage = savedLanguage;
+    }
+
     return this.categoryTranslations[this.currentLanguage][name] ?? name;
   }
 

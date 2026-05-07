@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe, DatePipe, NgIf } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { OrderService } from '../../../../core/services/order.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { LanguageService } from '../../../../core/services/language.service';
 import { Order } from '../../../../core/models/order.model';
 
 @Component({
   selector: 'app-order-history',
   standalone: true,
-  imports: [CommonModule, NgIf, CurrencyPipe, DatePipe, RouterLink],
+  imports: [CommonModule, NgIf, NgFor, CurrencyPipe, DatePipe, RouterLink],
   templateUrl: './order-history.component.html',
   styleUrl: './order-history.component.css'
 })
@@ -20,15 +21,20 @@ export class OrderHistoryComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private authService: AuthService
+    private authService: AuthService,
+    public languageService: LanguageService
   ) {}
 
   ngOnInit(): void {
+    this.loadOrders();
+  }
+
+  loadOrders(): void {
     const user = this.authService.getCurrentUser();
 
     if (!user) {
+      this.errorMessage = this.languageService.t('loginRequired');
       this.loading = false;
-      this.errorMessage = 'Musisz być zalogowany, aby zobaczyć swoje zamówienia.';
       return;
     }
 
@@ -38,7 +44,7 @@ export class OrderHistoryComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.errorMessage = 'Nie udało się pobrać zamówień.';
+        this.errorMessage = this.languageService.t('ordersLoadError');
         this.loading = false;
       }
     });

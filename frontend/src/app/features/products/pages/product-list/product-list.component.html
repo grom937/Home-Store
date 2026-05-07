@@ -1,29 +1,29 @@
 <button class="back-button" (click)="goHome()">
-  ← Strona główna
+  ← {{ languageService.t('backHome') }}
 </button>
 
 <section class="product-list-page">
-  <h1>Lista produktów</h1>
+  <h1>{{ languageService.t('productList') }}</h1>
 
   <div class="filters-card">
     <div class="filters-grid">
       <div class="filter-group">
-        <label for="search">Wyszukaj</label>
+        <label for="search">{{ languageService.t('search') }}</label>
         <input
           id="search"
           type="text"
           [(ngModel)]="searchTerm"
           (input)="applyFilters()"
-          placeholder="Wpisz nazwę lub opis produktu" />
+          [placeholder]="languageService.t('searchPlaceholder')" />
       </div>
 
       <div class="filter-group">
-        <label for="category">Kategoria</label>
+        <label for="category">{{ languageService.t('category') }}</label>
         <select
           id="category"
           [(ngModel)]="selectedCategoryId"
           (change)="applyFilters()">
-          <option value="">Wszystkie</option>
+          <option value="">{{ languageService.t('all') }}</option>
           <option *ngFor="let category of categories" [value]="category.id">
             {{ languageService.categoryName(category.name) }}
           </option>
@@ -31,60 +31,60 @@
       </div>
 
       <div class="filter-group">
-        <label for="productType">Typ produktu</label>
+        <label for="productType">{{ languageService.t('productType') }}</label>
         <select
           id="productType"
           [(ngModel)]="selectedProductType"
           (change)="applyFilters()">
-          <option value="">Wszystkie</option>
+          <option value="">{{ languageService.t('all') }}</option>
           <option *ngFor="let type of productTypes" [value]="type.value">
-            {{ type.label }}
+            {{ getProductTypeLabel(type) }}
           </option>
         </select>
       </div>
 
       <div class="filter-group">
-        <label for="minPrice">Cena od</label>
+        <label for="minPrice">{{ languageService.t('priceFrom') }}</label>
         <input
           id="minPrice"
           type="number"
           min="0"
           [(ngModel)]="minPrice"
           (input)="applyFilters()"
-          placeholder="Np. 500" />
+          placeholder="500" />
       </div>
 
       <div class="filter-group">
-        <label for="maxPrice">Cena do</label>
+        <label for="maxPrice">{{ languageService.t('priceTo') }}</label>
         <input
           id="maxPrice"
           type="number"
           min="0"
           [(ngModel)]="maxPrice"
           (input)="applyFilters()"
-          placeholder="Np. 2000" />
+          placeholder="2000" />
       </div>
 
       <div class="filter-group">
-        <label for="sort">Sortowanie</label>
+        <label for="sort">{{ languageService.t('sort') }}</label>
         <select
           id="sort"
           [(ngModel)]="sortOption"
           (change)="applyFilters()">
-          <option value="">Domyślne</option>
-          <option value="price-asc">Cena rosnąco</option>
-          <option value="price-desc">Cena malejąco</option>
+          <option value="">{{ languageService.t('defaultSort') }}</option>
+          <option value="price-asc">{{ languageService.t('priceAsc') }}</option>
+          <option value="price-desc">{{ languageService.t('priceDesc') }}</option>
         </select>
       </div>
     </div>
 
     <button class="clear-button" type="button" (click)="clearFilters()">
-      Wyczyść filtry
+      {{ languageService.t('clearFilters') }}
     </button>
   </div>
 
   <p *ngIf="loading" class="info-message">
-    Ładowanie produktów...
+    {{ languageService.t('loadingProducts') }}
   </p>
 
   <p *ngIf="error" class="error-message">
@@ -92,7 +92,7 @@
   </p>
 
   <div *ngIf="!loading && !error && filteredProducts.length === 0" class="info-message">
-    Brak produktów do wyświetlenia.
+    {{ languageService.t('noProducts') }}
   </div>
 
   <div *ngIf="!loading && !error && filteredProducts.length > 0" class="product-grid">

@@ -71,6 +71,8 @@ public class EmailService {
 
     private void send(String to, String subject, String text) {
         try {
+            log.info("Próba wysłania maila. Do: {}, Temat: {}", to, subject);
+
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromAddress);
             message.setTo(to);
@@ -79,9 +81,10 @@ public class EmailService {
 
             mailSender.send(message);
 
-            log.info("Wysłano mail do: {}", to);
-        } catch (MailException ex) {
-            log.warn("Nie udało się wysłać maila do {}. Powód: {}", to, ex.getMessage());
+            log.info("Wysłano mail do: {}, Temat: {}", to, subject);
+        } catch (Exception ex) {
+            log.warn("Nie udało się wysłać maila do: {}, Temat: {}. Powód: {}",
+                    to, subject, ex.getMessage(), ex);
         }
     }
 }

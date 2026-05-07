@@ -7,8 +7,9 @@ import { Product } from '../../../../core/models/product.model';
 import { Category } from '../../../../core/models/category.model';
 import { ProductService } from '../../../../core/services/product.service';
 import { CategoryService } from '../../../../core/services/category.service';
-import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { LanguageService } from '../../../../core/services/language.service';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
+
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -36,57 +37,57 @@ export class ProductListComponent implements OnInit {
   sortOption = '';
 
   productTypes = [
-    { value: 'LIVING_ROOM_SOFA', label: 'Sofa do salonu' },
-    { value: 'LIVING_ROOM_COFFEE_TABLE', label: 'Stolik kawowy do salonu' },
-    { value: 'LIVING_ROOM_BOOKCASE', label: 'Regał do salonu' },
-    { value: 'LIVING_ROOM_ARMCHAIR', label: 'Fotel do salonu' },
+    { value: 'LIVING_ROOM_SOFA', labelPl: 'Sofa do salonu', labelEn: 'Living room sofa' },
+    { value: 'LIVING_ROOM_COFFEE_TABLE', labelPl: 'Stolik kawowy', labelEn: 'Coffee table' },
+    { value: 'LIVING_ROOM_BOOKCASE', labelPl: 'Regał do salonu', labelEn: 'Living room bookcase' },
+    { value: 'LIVING_ROOM_ARMCHAIR', labelPl: 'Fotel do salonu', labelEn: 'Living room armchair' },
 
-    { value: 'BEDROOM_BED', label: 'Łóżko do sypialni' },
-    { value: 'BEDROOM_WARDROBE', label: 'Szafa do sypialni' },
-    { value: 'BEDROOM_CHEST_OF_DRAWERS', label: 'Komoda do sypialni' },
-    { value: 'BEDROOM_NIGHT_STAND', label: 'Szafka nocna' },
+    { value: 'BEDROOM_BED', labelPl: 'Łóżko', labelEn: 'Bed' },
+    { value: 'BEDROOM_WARDROBE', labelPl: 'Szafa', labelEn: 'Wardrobe' },
+    { value: 'BEDROOM_CHEST_OF_DRAWERS', labelPl: 'Komoda', labelEn: 'Chest of drawers' },
+    { value: 'BEDROOM_NIGHT_STAND', labelPl: 'Szafka nocna', labelEn: 'Nightstand' },
 
-    { value: 'KITCHEN_TABLE', label: 'Stół kuchenny' },
-    { value: 'KITCHEN_CHAIR', label: 'Krzesło kuchenne' },
-    { value: 'KITCHEN_SINK', label: 'Zlew kuchenny' },
-    { value: 'KITCHEN_CABINET', label: 'Szafka kuchenna' },
-    { value: 'KITCHEN_BAR_STOOL', label: 'Hoker kuchenny' },
+    { value: 'KITCHEN_TABLE', labelPl: 'Stół kuchenny', labelEn: 'Kitchen table' },
+    { value: 'KITCHEN_CHAIR', labelPl: 'Krzesło kuchenne', labelEn: 'Kitchen chair' },
+    { value: 'KITCHEN_SINK', labelPl: 'Zlew kuchenny', labelEn: 'Kitchen sink' },
+    { value: 'KITCHEN_CABINET', labelPl: 'Szafka kuchenna', labelEn: 'Kitchen cabinet' },
+    { value: 'KITCHEN_BAR_STOOL', labelPl: 'Hoker', labelEn: 'Bar stool' },
 
-    { value: 'BATHROOM_SINK_CABINET', label: 'Szafka pod umywalkę' },
-    { value: 'BATHROOM_BATH', label: 'Wanna' },
-    { value: 'BATHROOM_STORAGE_CABINET', label: 'Szafka łazienkowa' },
-    { value: 'BATHROOM_SHELF', label: 'Półka łazienkowa' },
-    { value: 'BATHROOM_LAUNDRY_BASKET', label: 'Kosz na pranie' },
+    { value: 'BATHROOM_SINK_CABINET', labelPl: 'Szafka pod umywalkę', labelEn: 'Sink cabinet' },
+    { value: 'BATHROOM_BATH', labelPl: 'Wanna', labelEn: 'Bathtub' },
+    { value: 'BATHROOM_STORAGE_CABINET', labelPl: 'Szafka łazienkowa', labelEn: 'Bathroom cabinet' },
+    { value: 'BATHROOM_SHELF', labelPl: 'Półka łazienkowa', labelEn: 'Bathroom shelf' },
+    { value: 'BATHROOM_LAUNDRY_BASKET', labelPl: 'Kosz na pranie', labelEn: 'Laundry basket' },
 
-    { value: 'OFFICE_DESK', label: 'Biurko' },
-    { value: 'OFFICE_CHAIR', label: 'Krzesło biurowe' },
-    { value: 'OFFICE_BOOKCASE', label: 'Regał biurowy' },
-    { value: 'OFFICE_FILE_CABINET', label: 'Szafka na dokumenty' },
+    { value: 'OFFICE_DESK', labelPl: 'Biurko', labelEn: 'Desk' },
+    { value: 'OFFICE_CHAIR', labelPl: 'Fotel biurowy', labelEn: 'Office chair' },
+    { value: 'OFFICE_BOOKCASE', labelPl: 'Regał biurowy', labelEn: 'Office bookcase' },
+    { value: 'OFFICE_FILE_CABINET', labelPl: 'Szafka na dokumenty', labelEn: 'File cabinet' },
 
-    { value: 'HALLWAY_SHOE_CABINET', label: 'Szafka na buty' },
-    { value: 'HALLWAY_COAT_RACK', label: 'Wieszak do przedpokoju' },
-    { value: 'HALLWAY_BENCH', label: 'Ławka do przedpokoju' },
-    { value: 'HALLWAY_MIRROR', label: 'Lustro do przedpokoju' },
+    { value: 'HALLWAY_SHOE_CABINET', labelPl: 'Szafka na buty', labelEn: 'Shoe cabinet' },
+    { value: 'HALLWAY_COAT_RACK', labelPl: 'Wieszak', labelEn: 'Coat rack' },
+    { value: 'HALLWAY_BENCH', labelPl: 'Ławka', labelEn: 'Bench' },
+    { value: 'HALLWAY_MIRROR', labelPl: 'Lustro', labelEn: 'Mirror' },
 
-    { value: 'TELEVISION', label: 'Telewizor' },
-    { value: 'SOUND_SYSTEM', label: 'System audio' },
-    { value: 'HOME_THEATER', label: 'Kino domowe' },
-    { value: 'MEDIA_PLAYER', label: 'Odtwarzacz multimedialny' },
-    { value: 'GAME_CONSOLE', label: 'Konsola do gier' },
+    { value: 'TELEVISION', labelPl: 'Telewizor', labelEn: 'Television' },
+    { value: 'SOUND_SYSTEM', labelPl: 'System audio', labelEn: 'Sound system' },
+    { value: 'HOME_THEATER', labelPl: 'Kino domowe', labelEn: 'Home theater' },
+    { value: 'MEDIA_PLAYER', labelPl: 'Odtwarzacz multimedialny', labelEn: 'Media player' },
+    { value: 'GAME_CONSOLE', labelPl: 'Konsola do gier', labelEn: 'Game console' },
 
-    { value: 'REFRIGERATOR', label: 'Lodówka' },
-    { value: 'DISHWASHER', label: 'Zmywarka' },
-    { value: 'WASHING_MACHINE', label: 'Pralka' },
-    { value: 'DRYER', label: 'Suszarka' },
-    { value: 'OVEN', label: 'Piekarnik' },
-    { value: 'MICROWAVE', label: 'Mikrofalówka' },
-    { value: 'COFFEE_MACHINE', label: 'Ekspres do kawy' },
-    { value: 'KETTLE', label: 'Czajnik' },
-    { value: 'TOASTER', label: 'Toster' },
-    { value: 'BLENDER', label: 'Blender' },
-    { value: 'VACUUM_CLEANER', label: 'Odkurzacz' },
-    { value: 'IRON', label: 'Żelazko' },
-    { value: 'AIR_PURIFIER', label: 'Oczyszczacz powietrza' }
+    { value: 'REFRIGERATOR', labelPl: 'Lodówka', labelEn: 'Refrigerator' },
+    { value: 'DISHWASHER', labelPl: 'Zmywarka', labelEn: 'Dishwasher' },
+    { value: 'WASHING_MACHINE', labelPl: 'Pralka', labelEn: 'Washing machine' },
+    { value: 'DRYER', labelPl: 'Suszarka', labelEn: 'Dryer' },
+    { value: 'OVEN', labelPl: 'Piekarnik', labelEn: 'Oven' },
+    { value: 'MICROWAVE', labelPl: 'Mikrofalówka', labelEn: 'Microwave' },
+    { value: 'COFFEE_MACHINE', labelPl: 'Ekspres do kawy', labelEn: 'Coffee machine' },
+    { value: 'KETTLE', labelPl: 'Czajnik', labelEn: 'Kettle' },
+    { value: 'TOASTER', labelPl: 'Toster', labelEn: 'Toaster' },
+    { value: 'BLENDER', labelPl: 'Blender', labelEn: 'Blender' },
+    { value: 'VACUUM_CLEANER', labelPl: 'Odkurzacz', labelEn: 'Vacuum cleaner' },
+    { value: 'IRON', labelPl: 'Żelazko', labelEn: 'Iron' },
+    { value: 'AIR_PURIFIER', labelPl: 'Oczyszczacz powietrza', labelEn: 'Air purifier' }
   ];
 
   constructor(
@@ -105,6 +106,10 @@ export class ProductListComponent implements OnInit {
 
   goHome(): void {
     this.router.navigate(['/']);
+  }
+
+  getProductTypeLabel(type: { labelPl: string; labelEn: string }): string {
+    return this.languageService.currentLanguage === 'pl' ? type.labelPl : type.labelEn;
   }
 
   loadCategories(): void {
@@ -130,7 +135,7 @@ export class ProductListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Błąd pobierania produktów:', err);
-        this.error = 'Nie udało się pobrać produktów z backendu.';
+        this.error = this.languageService.t('productsError');
         this.loading = false;
       }
     });
@@ -140,10 +145,15 @@ export class ProductListComponent implements OnInit {
     const search = this.searchTerm.trim().toLowerCase();
 
     let result = this.products.filter(product => {
+      const translatedName = this.languageService.productName(product.name).toLowerCase();
+      const translatedDescription = this.languageService.productDescription(product.description).toLowerCase();
+
       const matchesSearch =
         !search ||
         product.name.toLowerCase().includes(search) ||
-        (product.description ?? '').toLowerCase().includes(search);
+        translatedName.includes(search) ||
+        (product.description ?? '').toLowerCase().includes(search) ||
+        translatedDescription.includes(search);
 
       const matchesCategory =
         !this.selectedCategoryId ||

@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe, DatePipe, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { CartService } from '../../../../core/services/cart.service';
 import { OrderService } from '../../../../core/services/order.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { LanguageService } from '../../../../core/services/language.service';
 import { Cart } from '../../../../core/models/cart.model';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, NgIf, RouterLink, CurrencyPipe, DatePipe],
+  imports: [CommonModule, NgIf, NgFor, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -24,7 +25,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
-    private authService: AuthService
+    private authService: AuthService,
+    public languageService: LanguageService
   ) {}
 
   ngOnInit(): void {
@@ -39,19 +41,19 @@ export class CartComponent implements OnInit {
 
     if (!user) {
       this.loading = false;
-      this.errorMessage = 'Musisz być zalogowany, aby zobaczyć koszyk.';
+      this.errorMessage = this.languageService.t('loginRequired');
       return;
     }
 
     this.loading = true;
 
     this.cartService.getCart(user.id).subscribe({
-      next: (cart) => {
+      next: (cart: Cart) => {
         this.cart = cart;
         this.loading = false;
       },
       error: () => {
-        this.errorMessage = 'Nie udało się pobrać koszyka.';
+        this.errorMessage = this.languageService.t('cartLoadError');
         this.loading = false;
       }
     });
@@ -59,28 +61,36 @@ export class CartComponent implements OnInit {
 
   increaseQuantity(productId: string, currentQuantity: number): void {
     const user = this.authService.getCurrentUser();
+
     if (!user) {
       return;
     }
+
+    this.errorMessage = '';
+    this.successMessage = '';
 
     this.cartService.updateItem(productId, {
       userId: user.id,
       quantity: currentQuantity + 1
     }).subscribe({
-      next: (cart) => {
+      next: (cart: Cart) => {
         this.cart = cart;
       },
       error: () => {
-        this.errorMessage = 'Nie udało się zwiększyć ilości produktu.';
+        this.errorMessage = this.languageService.t('cartIncreaseError');
       }
     });
   }
 
   decreaseQuantity(productId: string, currentQuantity: number): void {
     const user = this.authService.getCurrentUser();
+
     if (!user) {
       return;
     }
+
+    this.errorMessage = '';
+    this.successMessage = '';
 
     if (currentQuantity <= 1) {
       this.removeItem(productId);
@@ -91,52 +101,62 @@ export class CartComponent implements OnInit {
       userId: user.id,
       quantity: currentQuantity - 1
     }).subscribe({
-      next: (cart) => {
+      next: (cart: Cart) => {
         this.cart = cart;
       },
       error: () => {
-        this.errorMessage = 'Nie udało się zmniejszyć ilości produktu.';
+        this.errorMessage = this.languageService.t('cartDecreaseError');
       }
     });
   }
 
   removeItem(productId: string): void {
     const user = this.authService.getCurrentUser();
+
     if (!user) {
       return;
     }
 
+    this.errorMessage = '';
+    this.successMessage = '';
+
     this.cartService.removeItem(user.id, productId).subscribe({
-      next: (cart) => {
+      next: (cart: Cart) => {
         this.cart = cart;
-        this.successMessage = 'Produkt został usunięty z koszyka.';
+        this.successMessage = this.languageService.t('cartItemRemoved');
       },
       error: () => {
-        this.errorMessage = 'Nie udało się usunąć produktu z koszyka.';
+        this.errorMessage = this.languageService.t('cartRemoveError');
       }
     });
   }
 
   clearCart(): void {
     const user = this.authService.getCurrentUser();
+
     if (!user) {
       return;
     }
 
+    this.errorMessage = '';
+    this.successMessage = '';
+
     this.cartService.clearCart(user.id).subscribe({
       next: () => {
         this.loadCart();
-        this.successMessage = 'Koszyk został wyczyszczony.';
+        this.successMessage = this.languageService.t('cartCleared');
       },
       error: () => {
-        this.errorMessage = 'Nie udało się wyczyścić koszyka.';
+        this.errorMessage = this.languageService.t('cartClearError');
       }
     });
   }
 
   createOrder(): void {
     const user = this.authService.getCurrentUser();
+
     if (!user) {
+      this.errorMessage = this.languageService.t('loginRequired');
       return;
     }
 
@@ -149,12 +169,12 @@ export class CartComponent implements OnInit {
     }).subscribe({
       next: () => {
         this.orderLoading = false;
-        this.successMessage = 'Zamówienie zostało złożone.';
+        this.successMessage = this.languageService.t('orderCreated');
         this.loadCart();
       },
       error: (error) => {
         this.orderLoading = false;
-        this.errorMessage = error.error?.message || 'Nie udało się złożyć zamówienia.';
+        this.errorMessage = error.error?.message || this.languageService.t('orderCreateError');
       }
     });
   }

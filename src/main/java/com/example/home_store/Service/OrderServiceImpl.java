@@ -63,10 +63,10 @@ public class OrderServiceImpl implements OrderService {
 
         Order savedOrder = orderRepository.saveAndFlush(order);
 
+        emailService.sendOrderConfirmation(savedOrder);
+
         cart.getItems().clear();
         cartRepository.save(cart);
-
-        emailService.sendOrderConfirmation(savedOrder);
 
         return toDto(savedOrder);
     }

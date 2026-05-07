@@ -1,16 +1,30 @@
-<a routerLink="/products" class="top-back-link">← Wróć do produktów</a>
+<a routerLink="/products" class="top-back-link">
+  ← {{ languageService.t('backProducts') }}
+</a>
+
 <section class="cart-page">
-  <h1>Koszyk</h1>
+  <h1>{{ languageService.t('basket') }}</h1>
 
-  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
 
-  <p *ngIf="loading">Ładowanie koszyka...</p>
+  <p class="success" *ngIf="successMessage">
+    {{ successMessage }}
+  </p>
+
+  <p *ngIf="loading">
+    {{ languageService.t('loadingCart') }}
+  </p>
 
   <div *ngIf="!loading && cart">
     <div *ngIf="cart.items.length === 0" class="empty-state">
-      <p>Twój koszyk jest pusty.</p>
-      <a routerLink="/products" class="back-link">Przejdź do produktów</a>
+      <p>{{ languageService.t('emptyCart') }}</p>
+
+      ```
+      <a routerLink="/products" class="back-link">
+        {{ languageService.t('goToProducts') }}
+      </a>
     </div>
 
     <div *ngIf="cart.items.length > 0" class="cart-layout">
@@ -18,40 +32,64 @@
         <article class="cart-item" *ngFor="let item of cart.items">
           <img
             [src]="item.imageUrl || 'https://via.placeholder.com/200x140?text=Brak+zdjecia'"
-            [alt]="item.productName"
+            [alt]="languageService.productName(item.productName)"
             class="item-image" />
 
           <div class="item-content">
-            <h3>{{ item.productName }}</h3>
-            <p>Cena: {{ item.unitPrice | currency:'PLN' }}</p>
-            <p>Wartość: {{ item.lineTotal | currency:'PLN' }}</p>
+            <h3>{{ languageService.productName(item.productName) }}</h3>
+
+            <p>
+              {{ languageService.t('price') }}:
+              PLN {{ item.unitPrice | number:'1.2-2' }}
+            </p>
+
+            <p>
+              {{ languageService.t('value') }}:
+              PLN {{ item.lineTotal | number:'1.2-2' }}
+            </p>
 
             <div class="quantity-controls">
-              <button type="button" (click)="decreaseQuantity(item.productId, item.quantity)">-</button>
+              <button type="button" (click)="decreaseQuantity(item.productId, item.quantity)">
+                -
+              </button>
+
               <span>{{ item.quantity }}</span>
-              <button type="button" (click)="increaseQuantity(item.productId, item.quantity)">+</button>
+
+              <button type="button" (click)="increaseQuantity(item.productId, item.quantity)">
+                +
+              </button>
             </div>
 
             <button type="button" class="remove-button" (click)="removeItem(item.productId)">
-              Usuń z koszyka
+              {{ languageService.t('removeFromCart') }}
             </button>
           </div>
         </article>
       </div>
 
       <aside class="summary-card">
-        <h2>Podsumowanie</h2>
-        <p>Liczba produktów: <strong>{{ cart.totalItems }}</strong></p>
-        <p>Kwota: <strong>{{ cart.totalAmount | currency:'PLN' }}</strong></p>
+        <h2>{{ languageService.t('summary') }}</h2>
+
+        <p>
+          {{ languageService.t('productCount') }}:
+          <strong>{{ cart.totalItems }}</strong>
+        </p>
+
+        <p>
+          {{ languageService.t('amount') }}:
+          <strong>PLN {{ cart.totalAmount | number:'1.2-2' }}</strong>
+        </p>
 
         <button type="button" class="primary-button" (click)="createOrder()" [disabled]="orderLoading">
-          {{ orderLoading ? 'Składanie...' : 'Złóż zamówienie' }}
+          {{ orderLoading ? languageService.t('placingOrder') : languageService.t('placeOrder') }}
         </button>
 
         <button type="button" class="secondary-button" (click)="clearCart()">
-          Wyczyść koszyk
+          {{ languageService.t('clearCart') }}
         </button>
       </aside>
     </div>
+    ```
+
   </div>
 </section>
