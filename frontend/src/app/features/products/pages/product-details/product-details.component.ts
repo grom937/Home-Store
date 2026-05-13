@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe, NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -7,11 +7,12 @@ import { ProductService } from '../../../../core/services/product.service';
 import { Product } from '../../../../core/models/product.model';
 import { CartService } from '../../../../core/services/cart.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { LanguageService } from '../../../../core/services/language.service';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, NgIf, RouterLink, CurrencyPipe, FormsModule],
+  imports: [CommonModule, NgIf, RouterLink, FormsModule],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -26,14 +27,15 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    public authService: AuthService
+    public authService: AuthService,
+    public languageService: LanguageService
   ) {}
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
 
     if (!productId) {
-      this.error = 'Nieprawidłowy identyfikator produktu.';
+      this.error = this.languageService.t('invalidProductId');
       this.loading = false;
       return;
     }
@@ -44,7 +46,7 @@ export class ProductDetailsComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Nie udało się pobrać szczegółów produktu.';
+        this.error = this.languageService.t('productDetailsLoadError');
         this.loading = false;
       }
     });
@@ -56,19 +58,19 @@ export class ProductDetailsComponent implements OnInit {
     const user = this.authService.getCurrentUser();
 
     if (!user) {
-      this.cartMessage = 'Musisz się zalogować, aby dodać produkt do koszyka.';
+      this.cartMessage = this.languageService.t('loginToAddCart');
       return;
     }
 
     if (!this.product?.id) {
-      this.cartMessage = 'Nie znaleziono produktu.';
+      this.cartMessage = this.languageService.t('productNotFound');
       return;
     }
 
     const quantity = Number(this.selectedQuantity);
 
     if (!quantity || quantity < 1) {
-      this.cartMessage = 'Ilość musi być większa od 0.';
+      this.cartMessage = this.languageService.t('quantityMustBePositive');
       return;
     }
 
@@ -78,10 +80,10 @@ export class ProductDetailsComponent implements OnInit {
       quantity
     }).subscribe({
       next: () => {
-        this.cartMessage = 'Produkt został dodany do koszyka.';
+        this.cartMessage = this.languageService.t('productAddedToCart');
       },
       error: (error) => {
-        this.cartMessage = error.error?.message || 'Nie udało się dodać produktu do koszyka.';
+        this.cartMessage = error.error?.message || this.languageService.t('productAddCartError');
       }
     });
   }

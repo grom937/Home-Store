@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 import { OrderService } from '../../../../core/services/order.service';
+import { LanguageService } from '../../../../core/services/language.service';
 import { Order } from '../../../../core/models/order.model';
 
 @Component({
@@ -21,7 +22,10 @@ export class OrderManageComponent implements OnInit {
 
   statuses = ['NEW', 'PROCESSING', 'SHIPPED', 'COMPLETED', 'CANCELLED'];
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    public languageService: LanguageService
+  ) {}
 
   ngOnInit(): void {
     this.loadOrders(false);
@@ -41,7 +45,7 @@ export class OrderManageComponent implements OnInit {
         this.loading = false;
       },
       error: (error) => {
-        this.errorMessage = error.error?.message || 'Nie udało się pobrać zamówień.';
+        this.errorMessage = error.error?.message || this.languageService.t('ordersLoadError');
         this.loading = false;
       }
     });
@@ -59,10 +63,10 @@ export class OrderManageComponent implements OnInit {
           this.orders[index] = updatedOrder;
         }
 
-        this.successMessage = `Status zamówienia został zmieniony na ${updatedOrder.status}.`;
+        this.successMessage = `${this.languageService.t('statusChanged')} ${updatedOrder.status}.`;
       },
       error: (error) => {
-        this.errorMessage = error.error?.message || 'Nie udało się zaktualizować statusu.';
+        this.errorMessage = error.error?.message || this.languageService.t('statusUpdateError');
       }
     });
   }

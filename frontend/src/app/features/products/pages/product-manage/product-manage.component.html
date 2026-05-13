@@ -1,101 +1,101 @@
-<a routerLink="/" class="top-back-link">← Strona główna</a>
+<a routerLink="/" class="top-back-link">← {{ languageService.t('backHome') }}</a>
 <section class="manage-page">
-  <h1>Panel zarządzania produktami</h1>
+  <h1>{{ languageService.t('productManageTitle') }}</h1>
 
   <div class="manage-layout">
     <div class="form-card">
-      <h2>{{ editingProductId ? 'Edytuj produkt' : 'Dodaj nowy produkt' }}</h2>
+      <h2>{{ editingProductId ? languageService.t('editProduct') : languageService.t('addNewProduct') }}</h2>
 
       <form [formGroup]="productForm" class="product-form">
         <div class="form-group">
-          <label for="name">Nazwa produktu</label>
-          <input id="name" formControlName="name" placeholder="Np. Nowoczesna sofa" />
+          <label for="name">{{ languageService.t('productName') }}</label>
+          <input id="name" formControlName="name" [placeholder]="languageService.t('productNamePlaceholder')" />
 
           <small
             class="error"
             *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
-            Nazwa jest wymagana i musi mieć minimum 2 znaki.
+            {{ languageService.t('productNameValidation') }}
           </small>
         </div>
 
         <div class="form-group">
-          <label for="description">Opis produktu</label>
+          <label for="description">{{ languageService.t('productDescription') }}</label>
           <textarea
             id="description"
             formControlName="description"
             rows="4"
-            placeholder="Krótki opis produktu"></textarea>
+            [placeholder]="languageService.t('productDescriptionPlaceholder')"></textarea>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="price">Cena</label>
-            <input id="price" type="number" formControlName="price" placeholder="Np. 1999" />
+            <label for="price">{{ languageService.t('price') }}</label>
+            <input id="price" type="number" formControlName="price" [placeholder]="languageService.t('pricePlaceholder')" />
 
             <small
               class="error"
               *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
-              Cena musi być większa od 0.
+              {{ languageService.t('priceValidation') }}
             </small>
           </div>
 
           <div class="form-group">
-            <label for="quantity">Ilość</label>
-            <input id="quantity" type="number" formControlName="quantity" placeholder="Np. 5" />
+            <label for="quantity">{{ languageService.t('quantity') }}</label>
+            <input id="quantity" type="number" formControlName="quantity" [placeholder]="languageService.t('quantityPlaceholder')" />
 
             <small
               class="error"
               *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched">
-              Ilość nie może być ujemna.
+              {{ languageService.t('quantityValidation') }}
             </small>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="imageUrl">URL obrazka</label>
+          <label for="imageUrl">{{ languageService.t('imageUrl') }}</label>
           <input
             id="imageUrl"
             formControlName="imageUrl"
-            placeholder="Np. https://example.com/sofa.jpg" />
+            [placeholder]="languageService.t('imageUrlPlaceholder')" />
 
           <small class="hint">
-            Tutaj wklejasz link do obrazka z internetu. Jeśli zostawisz puste, backend ustawi obrazek zastępczy.
+            {{ languageService.t('imageUrlHint') }}
           </small>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="productType">Typ produktu</label>
+            <label for="productType">{{ languageService.t('productType') }}</label>
             <select id="productType" formControlName="productType">
               <option *ngFor="let type of productTypes" [value]="type.value">
-                {{ type.label }}
+                {{ getProductTypeOptionLabel(type) }}
               </option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="categoryId">Kategoria</label>
+            <label for="categoryId">{{ languageService.t('category') }}</label>
             <select id="categoryId" formControlName="categoryId">
               <option *ngFor="let category of categories" [value]="category.id">
-                {{ category.name }}
+                {{ languageService.categoryName(category.name) }}
               </option>
             </select>
 
             <small
               class="error"
               *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
-              Kategoria jest wymagana.
+              {{ languageService.t('categoryRequired') }}
             </small>
           </div>
         </div>
 
         <div class="action-row">
           <button type="button" class="primary-button" (click)="submitForm()" [disabled]="productForm.invalid">
-            {{ editingProductId ? 'Zapisz zmiany' : 'Dodaj produkt' }}
+            {{ editingProductId ? languageService.t('saveChanges') : languageService.t('addProduct') }}
           </button>
 
           <button *ngIf="editingProductId" type="button" class="secondary-button" (click)="cancelEdit()">
-            Anuluj edycję
+            {{ languageService.t('cancelEdit') }}
           </button>
         </div>
       </form>
@@ -106,48 +106,48 @@
 
   <section class="products-section">
     <div class="products-header">
-      <h2>Lista produktów</h2>
+      <h2>{{ languageService.t('productList') }}</h2>
 
       <input
         class="search-input"
         type="text"
         [(ngModel)]="searchTerm"
         (input)="applySearch()"
-        placeholder="Wyszukaj produkt po nazwie lub opisie" />
+        [placeholder]="languageService.t('productManageSearchPlaceholder')" />
     </div>
 
     <div *ngIf="filteredProducts.length === 0" class="empty-state">
-      Brak produktów do wyświetlenia.
+      {{ languageService.t('noProducts') }}
     </div>
 
     <div class="products-grid" *ngIf="filteredProducts.length > 0">
       <article class="product-card" *ngFor="let product of filteredProducts">
         <div class="product-image-wrapper">
           <img
-            [src]="product.imageUrl || 'https://via.placeholder.com/400x250?text=Brak+zdjecia'"
-            [alt]="product.name"
+            [src]="product.imageUrl || 'https://via.placeholder.com/400x250?text=No+image'"
+            [alt]="languageService.productName(product.name)"
             class="product-image" />
         </div>
 
         <div class="product-card-content">
-          <h3>{{ product.name }}</h3>
+          <h3>{{ languageService.productName(product.name) }}</h3>
 
           <p class="description">
-            {{ product.description || 'Brak opisu produktu.' }}
+            {{ languageService.productDescription(product.description) || languageService.t('noDescription') }}
           </p>
 
-          <p><strong>Cena:</strong> {{ product.price }} zł</p>
-          <p><strong>Ilość:</strong> {{ product.quantity }}</p>
-          <p><strong>Typ:</strong> {{ getProductTypeLabel(product.productType) }}</p>
-          <p><strong>Kategoria:</strong> {{ getCategoryName(product.categoryId) }}</p>
+          <p><strong>{{ languageService.t('price') }}:</strong> {{ product.price }} zł</p>
+          <p><strong>{{ languageService.t('quantity') }}:</strong> {{ product.quantity }}</p>
+          <p><strong>{{ languageService.t('productType') }}:</strong> {{ getProductTypeLabel(product.productType) }}</p>
+          <p><strong>{{ languageService.t('category') }}:</strong> {{ getCategoryName(product.categoryId) }}</p>
 
           <div class="card-actions">
             <button class="edit-button" (click)="startEdit(product)">
-              Edytuj
+              {{ languageService.t('edit') }}
             </button>
 
             <button class="delete-button" (click)="deleteProduct(product.id)">
-              Usuń
+              {{ languageService.t('delete') }}
             </button>
           </div>
         </div>

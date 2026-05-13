@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../../core/services/auth.service';
+import { LanguageService } from '../../../../core/services/language.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public languageService: LanguageService
   ) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -44,7 +46,7 @@ export class RegisterComponent {
     const formValue = this.registerForm.getRawValue();
 
     if (formValue.password !== formValue.confirmPassword) {
-      this.errorMessage = 'Hasła nie są takie same.';
+      this.errorMessage = this.languageService.t('passwordsDoNotMatch');
       return;
     }
 
@@ -56,13 +58,13 @@ export class RegisterComponent {
       confirmPassword: formValue.confirmPassword ?? ''
     }).subscribe({
       next: () => {
-        this.successMessage = 'Konto zostało utworzone.';
+        this.successMessage = this.languageService.t('registerSuccess');
         this.registerForm.reset();
         this.isSubmitting = false;
         this.router.navigateByUrl('/account');
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.error?.message || 'Wystąpił błąd podczas rejestracji.';
+      error: (_error: HttpErrorResponse) => {
+        this.errorMessage = this.languageService.t('registerError');
         this.isSubmitting = false;
       }
     });

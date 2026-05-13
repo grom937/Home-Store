@@ -1,8 +1,10 @@
 <section class="product-details-page">
-  <a routerLink="/products" class="back-link">← Wróć do listy produktów</a>
+  <a routerLink="/products" class="back-link">
+    ← {{ languageService.t('backProducts') }}
+  </a>
 
   <p *ngIf="loading" class="info-message">
-    Ładowanie szczegółów produktu...
+    {{ languageService.t('loadingProductDetails') }}
   </p>
 
   <p *ngIf="error" class="error-message">
@@ -12,24 +14,37 @@
   <div *ngIf="!loading && !error && product" class="product-details-card">
     <div class="image-section">
       <img
-        [src]="product.imageUrl || 'https://via.placeholder.com/600x400?text=Brak+zdjecia'"
-        [alt]="product.name"
+        [src]="product.imageUrl || 'https://via.placeholder.com/600x400?text=No+image'"
+        [alt]="languageService.productName(product.name)"
         class="product-image"
       />
     </div>
 
     <div class="content-section">
-      <h1>{{ product.name }}</h1>
+      <h1>{{ languageService.productName(product.name) }}</h1>
 
-      <p class="type">Typ produktu: {{ product.productType }}</p>
-      <p class="description">
-        {{ product.description || 'Brak opisu produktu.' }}
+      <p class="type">
+        {{ languageService.t('productType') }}:
+        {{ languageService.productTypeName(product.productType) }}
       </p>
-      <p class="price">{{ product.price | currency:'PLN' }}</p>
-      <p class="quantity">Dostępna ilość: {{ product.quantity }}</p>
+
+      <p class="description">
+        {{ languageService.productDescription(product.description) || languageService.t('noDescription') }}
+      </p>
+
+      <p class="price">
+        PLN {{ product.price | number:'1.2-2' }}
+      </p>
+
+      <p class="quantity">
+        {{ languageService.t('availableQuantity') }}: {{ product.quantity }}
+      </p>
 
       <div class="quantity-box">
-        <label for="selectedQuantity">Ilość:</label>
+        <label for="selectedQuantity">
+          {{ languageService.t('quantity') }}:
+        </label>
+
         <input
           id="selectedQuantity"
           type="number"
@@ -39,10 +54,12 @@
       </div>
 
       <button type="button" class="add-to-cart-button" (click)="addToCart()">
-        Dodaj do koszyka
+        {{ languageService.t('addToCart') }}
       </button>
 
-      <p class="cart-message" *ngIf="cartMessage">{{ cartMessage }}</p>
+      <p class="cart-message" *ngIf="cartMessage">
+        {{ cartMessage }}
+      </p>
     </div>
   </div>
 </section>

@@ -11,7 +11,7 @@
     <h3>{{ languageService.productName(product.name) }}</h3>
 
     <p class="description">
-      {{ languageService.productDescription(product.description) || 'Brak opisu produktu.' }}
+      {{ languageService.productDescription(product.description) || languageService.t('noDescription') }}
     </p>
 
     <p class="price">

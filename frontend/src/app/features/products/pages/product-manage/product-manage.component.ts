@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { ProductService } from '../../../../core/services/product.service';
 import { CategoryService } from '../../../../core/services/category.service';
+import { LanguageService } from '../../../../core/services/language.service';
 import { Product } from '../../../../core/models/product.model';
 import { Category } from '../../../../core/models/category.model';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+
+type ProductTypeOption = {
+  value: string;
+  labelPl: string;
+  labelEn: string;
+};
 
 @Component({
   selector: 'app-product-manage',
@@ -33,58 +40,58 @@ export class ProductManageComponent implements OnInit {
   editingProductId: string | null = null;
   searchTerm = '';
 
-  productTypes = [
-    { value: 'LIVING_ROOM_SOFA', label: 'Sofa do salonu' },
-    { value: 'LIVING_ROOM_COFFEE_TABLE', label: 'Stolik kawowy do salonu' },
-    { value: 'LIVING_ROOM_BOOKCASE', label: 'Regał do salonu' },
-    { value: 'LIVING_ROOM_ARMCHAIR', label: 'Fotel do salonu' },
+  productTypes: ProductTypeOption[] = [
+    { value: 'LIVING_ROOM_SOFA', labelPl: 'Sofa do salonu', labelEn: 'Living room sofa' },
+    { value: 'LIVING_ROOM_COFFEE_TABLE', labelPl: 'Stolik kawowy do salonu', labelEn: 'Living room coffee table' },
+    { value: 'LIVING_ROOM_BOOKCASE', labelPl: 'Regał do salonu', labelEn: 'Living room bookcase' },
+    { value: 'LIVING_ROOM_ARMCHAIR', labelPl: 'Fotel do salonu', labelEn: 'Living room armchair' },
 
-    { value: 'BEDROOM_BED', label: 'Łóżko do sypialni' },
-    { value: 'BEDROOM_WARDROBE', label: 'Szafa do sypialni' },
-    { value: 'BEDROOM_CHEST_OF_DRAWERS', label: 'Komoda do sypialni' },
-    { value: 'BEDROOM_NIGHT_STAND', label: 'Szafka nocna' },
+    { value: 'BEDROOM_BED', labelPl: 'Łóżko do sypialni', labelEn: 'Bedroom bed' },
+    { value: 'BEDROOM_WARDROBE', labelPl: 'Szafa do sypialni', labelEn: 'Bedroom wardrobe' },
+    { value: 'BEDROOM_CHEST_OF_DRAWERS', labelPl: 'Komoda do sypialni', labelEn: 'Bedroom chest of drawers' },
+    { value: 'BEDROOM_NIGHT_STAND', labelPl: 'Szafka nocna', labelEn: 'Nightstand' },
 
-    { value: 'KITCHEN_TABLE', label: 'Stół kuchenny' },
-    { value: 'KITCHEN_CHAIR', label: 'Krzesło kuchenne' },
-    { value: 'KITCHEN_SINK', label: 'Zlew kuchenny' },
-    { value: 'KITCHEN_CABINET', label: 'Szafka kuchenna' },
-    { value: 'KITCHEN_BAR_STOOL', label: 'Hoker kuchenny' },
+    { value: 'KITCHEN_TABLE', labelPl: 'Stół kuchenny', labelEn: 'Kitchen table' },
+    { value: 'KITCHEN_CHAIR', labelPl: 'Krzesło kuchenne', labelEn: 'Kitchen chair' },
+    { value: 'KITCHEN_SINK', labelPl: 'Zlew kuchenny', labelEn: 'Kitchen sink' },
+    { value: 'KITCHEN_CABINET', labelPl: 'Szafka kuchenna', labelEn: 'Kitchen cabinet' },
+    { value: 'KITCHEN_BAR_STOOL', labelPl: 'Hoker kuchenny', labelEn: 'Kitchen bar stool' },
 
-    { value: 'BATHROOM_SINK_CABINET', label: 'Szafka pod umywalkę' },
-    { value: 'BATHROOM_BATH', label: 'Wanna' },
-    { value: 'BATHROOM_STORAGE_CABINET', label: 'Szafka łazienkowa' },
-    { value: 'BATHROOM_SHELF', label: 'Półka łazienkowa' },
-    { value: 'BATHROOM_LAUNDRY_BASKET', label: 'Kosz na pranie' },
+    { value: 'BATHROOM_SINK_CABINET', labelPl: 'Szafka pod umywalkę', labelEn: 'Sink cabinet' },
+    { value: 'BATHROOM_BATH', labelPl: 'Wanna', labelEn: 'Bathtub' },
+    { value: 'BATHROOM_STORAGE_CABINET', labelPl: 'Szafka łazienkowa', labelEn: 'Bathroom cabinet' },
+    { value: 'BATHROOM_SHELF', labelPl: 'Półka łazienkowa', labelEn: 'Bathroom shelf' },
+    { value: 'BATHROOM_LAUNDRY_BASKET', labelPl: 'Kosz na pranie', labelEn: 'Laundry basket' },
 
-    { value: 'OFFICE_DESK', label: 'Biurko' },
-    { value: 'OFFICE_CHAIR', label: 'Krzesło biurowe' },
-    { value: 'OFFICE_BOOKCASE', label: 'Regał biurowy' },
-    { value: 'OFFICE_FILE_CABINET', label: 'Szafka na dokumenty' },
+    { value: 'OFFICE_DESK', labelPl: 'Biurko', labelEn: 'Desk' },
+    { value: 'OFFICE_CHAIR', labelPl: 'Krzesło biurowe', labelEn: 'Office chair' },
+    { value: 'OFFICE_BOOKCASE', labelPl: 'Regał biurowy', labelEn: 'Office bookcase' },
+    { value: 'OFFICE_FILE_CABINET', labelPl: 'Szafka na dokumenty', labelEn: 'File cabinet' },
 
-    { value: 'HALLWAY_SHOE_CABINET', label: 'Szafka na buty' },
-    { value: 'HALLWAY_COAT_RACK', label: 'Wieszak do przedpokoju' },
-    { value: 'HALLWAY_BENCH', label: 'Ławka do przedpokoju' },
-    { value: 'HALLWAY_MIRROR', label: 'Lustro do przedpokoju' },
+    { value: 'HALLWAY_SHOE_CABINET', labelPl: 'Szafka na buty', labelEn: 'Shoe cabinet' },
+    { value: 'HALLWAY_COAT_RACK', labelPl: 'Wieszak do przedpokoju', labelEn: 'Coat rack' },
+    { value: 'HALLWAY_BENCH', labelPl: 'Ławka do przedpokoju', labelEn: 'Hallway bench' },
+    { value: 'HALLWAY_MIRROR', labelPl: 'Lustro do przedpokoju', labelEn: 'Hallway mirror' },
 
-    { value: 'TELEVISION', label: 'Telewizor' },
-    { value: 'SOUND_SYSTEM', label: 'System audio' },
-    { value: 'HOME_THEATER', label: 'Kino domowe' },
-    { value: 'MEDIA_PLAYER', label: 'Odtwarzacz multimedialny' },
-    { value: 'GAME_CONSOLE', label: 'Konsola do gier' },
+    { value: 'TELEVISION', labelPl: 'Telewizor', labelEn: 'TV' },
+    { value: 'SOUND_SYSTEM', labelPl: 'System audio', labelEn: 'Sound system' },
+    { value: 'HOME_THEATER', labelPl: 'Kino domowe', labelEn: 'Home theater' },
+    { value: 'MEDIA_PLAYER', labelPl: 'Odtwarzacz multimedialny', labelEn: 'Media player' },
+    { value: 'GAME_CONSOLE', labelPl: 'Konsola do gier', labelEn: 'Game console' },
 
-    { value: 'REFRIGERATOR', label: 'Lodówka' },
-    { value: 'DISHWASHER', label: 'Zmywarka' },
-    { value: 'WASHING_MACHINE', label: 'Pralka' },
-    { value: 'DRYER', label: 'Suszarka' },
-    { value: 'OVEN', label: 'Piekarnik' },
-    { value: 'MICROWAVE', label: 'Mikrofalówka' },
-    { value: 'COFFEE_MACHINE', label: 'Ekspres do kawy' },
-    { value: 'KETTLE', label: 'Czajnik' },
-    { value: 'TOASTER', label: 'Toster' },
-    { value: 'BLENDER', label: 'Blender' },
-    { value: 'VACUUM_CLEANER', label: 'Odkurzacz' },
-    { value: 'IRON', label: 'Żelazko' },
-    { value: 'AIR_PURIFIER', label: 'Oczyszczacz powietrza' }
+    { value: 'REFRIGERATOR', labelPl: 'Lodówka', labelEn: 'Refrigerator' },
+    { value: 'DISHWASHER', labelPl: 'Zmywarka', labelEn: 'Dishwasher' },
+    { value: 'WASHING_MACHINE', labelPl: 'Pralka', labelEn: 'Washing machine' },
+    { value: 'DRYER', labelPl: 'Suszarka', labelEn: 'Dryer' },
+    { value: 'OVEN', labelPl: 'Piekarnik', labelEn: 'Oven' },
+    { value: 'MICROWAVE', labelPl: 'Mikrofalówka', labelEn: 'Microwave' },
+    { value: 'COFFEE_MACHINE', labelPl: 'Ekspres do kawy', labelEn: 'Coffee machine' },
+    { value: 'KETTLE', labelPl: 'Czajnik', labelEn: 'Kettle' },
+    { value: 'TOASTER', labelPl: 'Toster', labelEn: 'Toaster' },
+    { value: 'BLENDER', labelPl: 'Blender', labelEn: 'Blender' },
+    { value: 'VACUUM_CLEANER', labelPl: 'Odkurzacz', labelEn: 'Vacuum cleaner' },
+    { value: 'IRON', labelPl: 'Żelazko', labelEn: 'Iron' },
+    { value: 'AIR_PURIFIER', labelPl: 'Oczyszczacz powietrza', labelEn: 'Air purifier' }
   ];
 
   productForm: ReturnType<FormBuilder['group']>;
@@ -94,7 +101,8 @@ export class ProductManageComponent implements OnInit {
     private categoryService: CategoryService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public languageService: LanguageService
   ) {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -124,7 +132,7 @@ export class ProductManageComponent implements OnInit {
         }
       },
       error: () => {
-        this.snackBar.open('Błąd ładowania kategorii', 'OK', {
+        this.snackBar.open(this.languageService.t('categoryLoadErrorShort'), 'OK', {
           duration: 3000
         });
       }
@@ -138,7 +146,7 @@ export class ProductManageComponent implements OnInit {
         this.applySearch();
       },
       error: () => {
-        this.snackBar.open('Błąd ładowania produktów', 'OK', {
+        this.snackBar.open(this.languageService.t('productsLoadErrorShort'), 'OK', {
           duration: 3000
         });
       }
@@ -148,18 +156,23 @@ export class ProductManageComponent implements OnInit {
   applySearch(): void {
     const search = this.searchTerm.trim().toLowerCase();
 
-    this.filteredProducts = this.products.filter(product =>
-      !search ||
-      product.name.toLowerCase().includes(search) ||
-      (product.description ?? '').toLowerCase().includes(search)
-    );
+    this.filteredProducts = this.products.filter(product => {
+      const translatedName = this.languageService.productName(product.name).toLowerCase();
+      const translatedDescription = this.languageService.productDescription(product.description).toLowerCase();
+
+      return !search ||
+        product.name.toLowerCase().includes(search) ||
+        (product.description ?? '').toLowerCase().includes(search) ||
+        translatedName.includes(search) ||
+        translatedDescription.includes(search);
+    });
   }
 
   submitForm(): void {
     if (this.productForm.invalid) {
       this.productForm.markAllAsTouched();
 
-      this.snackBar.open('Uzupełnij poprawnie formularz', 'OK', {
+      this.snackBar.open(this.languageService.t('fillFormCorrectly'), 'OK', {
         duration: 3000
       });
       return;
@@ -180,7 +193,7 @@ export class ProductManageComponent implements OnInit {
     if (this.editingProductId) {
       this.productService.update(this.editingProductId, productPayload).subscribe({
         next: () => {
-          this.snackBar.open('Produkt został zaktualizowany', 'OK', {
+          this.snackBar.open(this.languageService.t('productUpdated'), 'OK', {
             duration: 3000
           });
 
@@ -188,7 +201,7 @@ export class ProductManageComponent implements OnInit {
           this.loadProducts();
         },
         error: () => {
-          this.snackBar.open('Błąd aktualizacji produktu', 'OK', {
+          this.snackBar.open(this.languageService.t('productUpdateError'), 'OK', {
             duration: 3000
           });
         }
@@ -199,7 +212,7 @@ export class ProductManageComponent implements OnInit {
 
     this.productService.create(productPayload).subscribe({
       next: () => {
-        this.snackBar.open('Produkt został dodany', 'OK', {
+        this.snackBar.open(this.languageService.t('productAdded'), 'OK', {
           duration: 3000
         });
 
@@ -207,7 +220,7 @@ export class ProductManageComponent implements OnInit {
         this.loadProducts();
       },
       error: () => {
-        this.snackBar.open('Błąd dodawania produktu', 'OK', {
+        this.snackBar.open(this.languageService.t('productAddError'), 'OK', {
           duration: 3000
         });
       }
@@ -258,7 +271,7 @@ export class ProductManageComponent implements OnInit {
       autoFocus: false,
       restoreFocus: false,
       data: {
-        message: 'Czy na pewno chcesz usunąć ten produkt? Tej operacji nie można cofnąć.'
+        message: this.languageService.t('confirmDeleteProductMessage')
       }
     });
 
@@ -266,14 +279,14 @@ export class ProductManageComponent implements OnInit {
       if (result) {
         this.productService.delete(id).subscribe({
           next: () => {
-            this.snackBar.open('Produkt został usunięty', 'OK', {
+            this.snackBar.open(this.languageService.t('productDeleted'), 'OK', {
               duration: 3000
             });
 
             this.loadProducts();
           },
           error: () => {
-            this.snackBar.open('Błąd usuwania produktu', 'OK', {
+            this.snackBar.open(this.languageService.t('productDeleteError'), 'OK', {
               duration: 3000
             });
           }
@@ -284,11 +297,15 @@ export class ProductManageComponent implements OnInit {
 
   getCategoryName(categoryId: string): string {
     const found = this.categories.find((category) => category.id === categoryId);
-    return found ? found.name : 'Nieznana kategoria';
+    return found ? this.languageService.categoryName(found.name) : this.languageService.t('unknownCategory');
+  }
+
+  getProductTypeOptionLabel(type: ProductTypeOption): string {
+    return this.languageService.currentLanguage === 'en' ? type.labelEn : type.labelPl;
   }
 
   getProductTypeLabel(productType: string): string {
     const found = this.productTypes.find((type) => type.value === productType);
-    return found ? found.label : productType;
+    return found ? this.getProductTypeOptionLabel(found) : productType;
   }
 }

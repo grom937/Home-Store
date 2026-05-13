@@ -1,33 +1,33 @@
-<a routerLink="/" class="top-back-link">← Strona główna</a>
+<a routerLink="/" class="top-back-link">← {{ languageService.t('backHome') }}</a>
 <section class="login-page">
   <div class="login-card">
-    <h1>Logowanie</h1>
-    <p class="subtitle">Zaloguj się do Home Store.</p>
+    <h1>{{ languageService.t('login') }}</h1>
+    <p class="subtitle">{{ languageService.t('authLoginSubtitle') }}</p>
 
     <form [formGroup]="loginForm" (ngSubmit)="submit()" class="login-form">
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">{{ languageService.t('email') }}</label>
         <input
           id="email"
           type="email"
           formControlName="email"
-          placeholder="np. name@homestore.pl" />
+          [placeholder]="languageService.t('emailPlaceholderLogin')" />
 
         <small class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          Podaj poprawny adres email.
+          {{ languageService.t('invalidEmail') }}
         </small>
       </div>
 
       <div class="form-group">
-        <label for="password">Hasło</label>
+        <label for="password">{{ languageService.t('password') }}</label>
         <input
           id="password"
           type="password"
           formControlName="password"
-          placeholder="podaj hasło" />
+          [placeholder]="languageService.t('passwordPlaceholderLogin')" />
 
         <small class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          Hasło jest wymagane.
+          {{ languageService.t('passwordRequired') }}
         </small>
       </div>
 
@@ -35,10 +35,10 @@
       <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
       <button type="submit" [disabled]="isSubmitting">
-        {{ isSubmitting ? 'Logowanie...' : 'Zaloguj się' }}
+        {{ isSubmitting ? languageService.t('loggingIn') : languageService.t('loginButton') }}
       </button>
     </form>
 
-    <a routerLink="/register" class="back-link">Nie masz konta? Zarejestruj się</a>
+    <a routerLink="/register" class="back-link">{{ languageService.t('noAccountRegister') }}</a>
   </div>
 </section>

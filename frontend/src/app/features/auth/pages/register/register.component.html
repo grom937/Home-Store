@@ -1,46 +1,46 @@
-<a routerLink="/" class="top-back-link">← Strona główna</a>
+<a routerLink="/" class="top-back-link">← {{ languageService.t('backHome') }}</a>
 <section class="register-page">
   <div class="register-card">
-    <h1>Rejestracja</h1>
-    <p class="subtitle">Utwórz nowe konto w Home Store.</p>
+    <h1>{{ languageService.t('register') }}</h1>
+    <p class="subtitle">{{ languageService.t('authRegisterSubtitle') }}</p>
 
     <form [formGroup]="registerForm" (ngSubmit)="submit()" class="register-form">
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">{{ languageService.t('email') }}</label>
         <input
           id="email"
           type="email"
           formControlName="email"
-          placeholder="np. jan.kowalski@email.com" />
+          [placeholder]="languageService.t('emailPlaceholderRegister')" />
 
         <small class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
-          Podaj poprawny adres email.
+          {{ languageService.t('invalidEmail') }}
         </small>
       </div>
 
       <div class="form-group">
-        <label for="password">Hasło</label>
+        <label for="password">{{ languageService.t('password') }}</label>
         <input
           id="password"
           type="password"
           formControlName="password"
-          placeholder="minimum 6 znaków" />
+          [placeholder]="languageService.t('passwordPlaceholderRegister')" />
 
         <small class="error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-          Hasło musi mieć co najmniej 6 znaków.
+          {{ languageService.t('passwordMinLength') }}
         </small>
       </div>
 
       <div class="form-group">
-        <label for="confirmPassword">Powtórz hasło</label>
+        <label for="confirmPassword">{{ languageService.t('confirmPassword') }}</label>
         <input
           id="confirmPassword"
           type="password"
           formControlName="confirmPassword"
-          placeholder="powtórz hasło" />
+          [placeholder]="languageService.t('confirmPasswordPlaceholder')" />
 
         <small class="error" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
-          Potwierdzenie hasła jest wymagane.
+          {{ languageService.t('confirmPasswordRequired') }}
         </small>
       </div>
 
@@ -48,10 +48,10 @@
       <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
       <button type="submit" [disabled]="isSubmitting">
-        {{ isSubmitting ? 'Tworzenie konta...' : 'Zarejestruj się' }}
+        {{ isSubmitting ? languageService.t('creatingAccount') : languageService.t('registerButton') }}
       </button>
     </form>
 
-    <a routerLink="/login" class="back-link">Masz już konto? Zaloguj się</a>
+    <a routerLink="/login" class="back-link">{{ languageService.t('haveAccountLogin') }}</a>
   </div>
 </section>

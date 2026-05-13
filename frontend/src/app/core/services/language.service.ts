@@ -18,6 +18,31 @@ export class LanguageService {
       register: 'Rejestracja',
       login: 'Logowanie',
       logout: 'Wyloguj',
+      authLoginSubtitle: 'Zaloguj się do Home Store.',
+      authRegisterSubtitle: 'Utwórz nowe konto w Home Store.',
+      email: 'Email',
+      password: 'Hasło',
+      confirmPassword: 'Powtórz hasło',
+      emailPlaceholderLogin: 'np. name@homestore.pl',
+      emailPlaceholderRegister: 'np. jan.kowalski@email.com',
+      passwordPlaceholderLogin: 'podaj hasło',
+      passwordPlaceholderRegister: 'minimum 6 znaków',
+      confirmPasswordPlaceholder: 'powtórz hasło',
+      invalidEmail: 'Podaj poprawny adres email.',
+      passwordRequired: 'Hasło jest wymagane.',
+      passwordMinLength: 'Hasło musi mieć co najmniej 6 znaków.',
+      confirmPasswordRequired: 'Potwierdzenie hasła jest wymagane.',
+      passwordsDoNotMatch: 'Hasła nie są takie same.',
+      loginSuccess: 'Zalogowano pomyślnie.',
+      loginError: 'Wystąpił błąd podczas logowania.',
+      registerSuccess: 'Konto zostało utworzone.',
+      registerError: 'Wystąpił błąd podczas rejestracji.',
+      loggingIn: 'Logowanie...',
+      creatingAccount: 'Tworzenie konta...',
+      loginButton: 'Zaloguj się',
+      registerButton: 'Zarejestruj się',
+      noAccountRegister: 'Nie masz konta? Zarejestruj się',
+      haveAccountLogin: 'Masz już konto? Zaloguj się',
       adminProducts: 'Zarządzanie produktami',
       adminOrders: 'Zarządzanie zamówieniami',
       myAccount: 'Moje konto',
@@ -36,6 +61,16 @@ export class LanguageService {
       categoryError: 'Nie udało się pobrać kategorii z backendu.',
       productsError: 'Nie udało się pobrać produktów z backendu.',
       noDescription: 'Brak opisu produktu.',
+      loadingProductDetails: 'Ładowanie szczegółów produktu...',
+      productDetailsLoadError: 'Nie udało się pobrać szczegółów produktu.',
+      invalidProductId: 'Nieprawidłowy identyfikator produktu.',
+      loginToAddCart: 'Musisz się zalogować, aby dodać produkt do koszyka.',
+      productNotFound: 'Nie znaleziono produktu.',
+      quantityMustBePositive: 'Ilość musi być większa od 0.',
+      productAddedToCart: 'Produkt został dodany do koszyka.',
+      productAddCartError: 'Nie udało się dodać produktu do koszyka.',
+      availableQuantity: 'Dostępna ilość',
+      addToCart: 'Dodaj do koszyka',
       productList: 'Lista produktów',
       search: 'Wyszukaj',
       searchPlaceholder: 'Wpisz nazwę lub opis produktu',
@@ -76,7 +111,52 @@ export class LanguageService {
       date: 'Data',
       status: 'Status',
       pieces: 'szt.',
-      cartIncreaseError: 'Nie udało się zwiększyć ilości produktu.', cartDecreaseError: 'Nie udało się zmniejszyć ilości produktu.', cartItemRemoved: 'Produkt został usunięty z koszyka.', cartCleared: 'Koszyk został wyczyszczony.', placingOrder: 'Składanie...'
+      cartIncreaseError: 'Nie udało się zwiększyć ilości produktu.',
+      cartDecreaseError: 'Nie udało się zmniejszyć ilości produktu.',
+      cartItemRemoved: 'Produkt został usunięty z koszyka.',
+      cartCleared: 'Koszyk został wyczyszczony.',
+      placingOrder: 'Składanie...',
+      productManageTitle: 'Panel zarządzania produktami',
+      addNewProduct: 'Dodaj nowy produkt',
+      editProduct: 'Edytuj produkt',
+      productName: 'Nazwa produktu',
+      productDescription: 'Opis produktu',
+      productNamePlaceholder: 'Np. Nowoczesna sofa',
+      productDescriptionPlaceholder: 'Krótki opis produktu',
+      productNameValidation: 'Nazwa jest wymagana i musi mieć minimum 2 znaki.',
+      pricePlaceholder: 'Np. 1999',
+      priceValidation: 'Cena musi być większa od 0.',
+      quantity: 'Ilość',
+      quantityPlaceholder: 'Np. 5',
+      quantityValidation: 'Ilość nie może być ujemna.',
+      imageUrl: 'URL obrazka',
+      imageUrlPlaceholder: 'Np. https://example.com/sofa.jpg',
+      imageUrlHint: 'Tutaj wklejasz link do obrazka z internetu. Jeśli zostawisz puste, backend ustawi obrazek zastępczy.',
+      categoryRequired: 'Kategoria jest wymagana.',
+      saveChanges: 'Zapisz zmiany',
+      addProduct: 'Dodaj produkt',
+      cancelEdit: 'Anuluj edycję',
+      productManageSearchPlaceholder: 'Wyszukaj produkt po nazwie lub opisie',
+      edit: 'Edytuj',
+      delete: 'Usuń',
+      unknownCategory: 'Nieznana kategoria',
+      fillFormCorrectly: 'Uzupełnij poprawnie formularz',
+      categoryLoadErrorShort: 'Błąd ładowania kategorii',
+      productsLoadErrorShort: 'Błąd ładowania produktów',
+      productUpdated: 'Produkt został zaktualizowany',
+      productUpdateError: 'Błąd aktualizacji produktu',
+      productAdded: 'Produkt został dodany',
+      productAddError: 'Błąd dodawania produktu',
+      productDeleted: 'Produkt został usunięty',
+      productDeleteError: 'Błąd usuwania produktu',
+      confirmDeleteProductMessage: 'Czy na pewno chcesz usunąć ten produkt? Tej operacji nie można cofnąć.',
+      confirmDeleteTitle: 'Potwierdzenie usunięcia',
+      cancel: 'Anuluj',
+      noOrdersAdmin: 'Brak zamówień do wyświetlenia.',
+      user: 'Użytkownik',
+      saveStatus: 'Zapisz status',
+      statusChanged: 'Status zamówienia został zmieniony na',
+      statusUpdateError: 'Nie udało się zaktualizować statusu.'
     },
     en: {
       home: 'Home',
@@ -86,6 +166,31 @@ export class LanguageService {
       register: 'Register',
       login: 'Login',
       logout: 'Logout',
+      authLoginSubtitle: 'Log in to Home Store.',
+      authRegisterSubtitle: 'Create a new Home Store account.',
+      email: 'Email',
+      password: 'Password',
+      confirmPassword: 'Confirm password',
+      emailPlaceholderLogin: 'e.g. name@homestore.com',
+      emailPlaceholderRegister: 'e.g. john.smith@email.com',
+      passwordPlaceholderLogin: 'enter password',
+      passwordPlaceholderRegister: 'minimum 6 characters',
+      confirmPasswordPlaceholder: 'repeat password',
+      invalidEmail: 'Enter a valid email address.',
+      passwordRequired: 'Password is required.',
+      passwordMinLength: 'Password must be at least 6 characters long.',
+      confirmPasswordRequired: 'Password confirmation is required.',
+      passwordsDoNotMatch: 'Passwords do not match.',
+      loginSuccess: 'Logged in successfully.',
+      loginError: 'An error occurred while logging in.',
+      registerSuccess: 'Account has been created.',
+      registerError: 'An error occurred during registration.',
+      loggingIn: 'Logging in...',
+      creatingAccount: 'Creating account...',
+      loginButton: 'Log in',
+      registerButton: 'Register',
+      noAccountRegister: 'No account? Register',
+      haveAccountLogin: 'Already have an account? Log in',
       adminProducts: 'Manage products',
       adminOrders: 'Manage orders',
       myAccount: 'My account',
@@ -104,6 +209,16 @@ export class LanguageService {
       categoryError: 'Could not load categories from backend.',
       productsError: 'Could not load products from backend.',
       noDescription: 'No product description.',
+      loadingProductDetails: 'Loading product details...',
+      productDetailsLoadError: 'Could not load product details.',
+      invalidProductId: 'Invalid product identifier.',
+      loginToAddCart: 'You must be logged in to add a product to cart.',
+      productNotFound: 'Product was not found.',
+      quantityMustBePositive: 'Quantity must be greater than 0.',
+      productAddedToCart: 'Product has been added to cart.',
+      productAddCartError: 'Could not add product to cart.',
+      availableQuantity: 'Available quantity',
+      addToCart: 'Add to cart',
       productList: 'Product list',
       search: 'Search',
       searchPlaceholder: 'Enter product name or description',
@@ -144,7 +259,52 @@ export class LanguageService {
       date: 'Date',
       status: 'Status',
       pieces: 'pcs.',
-      cartIncreaseError: 'Could not increase product quantity.', cartDecreaseError: 'Could not decrease product quantity.', cartItemRemoved: 'Product has been removed from cart.', cartCleared: 'Cart has been cleared.', placingOrder: 'Placing order...'
+      cartIncreaseError: 'Could not increase product quantity.',
+      cartDecreaseError: 'Could not decrease product quantity.',
+      cartItemRemoved: 'Product has been removed from cart.',
+      cartCleared: 'Cart has been cleared.',
+      placingOrder: 'Placing order...',
+      productManageTitle: 'Product management panel',
+      addNewProduct: 'Add new product',
+      editProduct: 'Edit product',
+      productName: 'Product name',
+      productDescription: 'Product description',
+      productNamePlaceholder: 'E.g. Modern sofa',
+      productDescriptionPlaceholder: 'Short product description',
+      productNameValidation: 'Name is required and must be at least 2 characters long.',
+      pricePlaceholder: 'E.g. 1999',
+      priceValidation: 'Price must be greater than 0.',
+      quantity: 'Quantity',
+      quantityPlaceholder: 'E.g. 5',
+      quantityValidation: 'Quantity cannot be negative.',
+      imageUrl: 'Image URL',
+      imageUrlPlaceholder: 'E.g. https://example.com/sofa.jpg',
+      imageUrlHint: 'Paste an image link from the internet here. If you leave it empty, the backend will set a placeholder image.',
+      categoryRequired: 'Category is required.',
+      saveChanges: 'Save changes',
+      addProduct: 'Add product',
+      cancelEdit: 'Cancel editing',
+      productManageSearchPlaceholder: 'Search product by name or description',
+      edit: 'Edit',
+      delete: 'Delete',
+      unknownCategory: 'Unknown category',
+      fillFormCorrectly: 'Fill in the form correctly',
+      categoryLoadErrorShort: 'Error loading categories',
+      productsLoadErrorShort: 'Error loading products',
+      productUpdated: 'Product has been updated',
+      productUpdateError: 'Error updating product',
+      productAdded: 'Product has been added',
+      productAddError: 'Error adding product',
+      productDeleted: 'Product has been deleted',
+      productDeleteError: 'Error deleting product',
+      confirmDeleteProductMessage: 'Are you sure you want to delete this product? This action cannot be undone.',
+      confirmDeleteTitle: 'Delete confirmation',
+      cancel: 'Cancel',
+      noOrdersAdmin: 'No orders to display.',
+      user: 'User',
+      saveStatus: 'Save status',
+      statusChanged: 'Order status has been changed to',
+      statusUpdateError: 'Could not update status.'
     }
   };
 
@@ -170,8 +330,117 @@ export class LanguageService {
       Bathroom: 'Bathroom',
       Office: 'Office',
       Hallway: 'Hallway',
-      RTV: 'TV & Audio',
+      RTV: 'RTV',
       AGD: 'Home appliances'
+    }
+  };
+
+  private productTypeTranslations: Record<Language, Record<string, string>> = {
+    pl: {
+      LIVING_ROOM_SOFA: 'Sofa do salonu',
+      LIVING_ROOM_COFFEE_TABLE: 'Stolik kawowy',
+      LIVING_ROOM_BOOKCASE: 'Regał do salonu',
+      LIVING_ROOM_ARMCHAIR: 'Fotel do salonu',
+
+      BEDROOM_BED: 'Łóżko',
+      BEDROOM_WARDROBE: 'Szafa',
+      BEDROOM_CHEST_OF_DRAWERS: 'Komoda',
+      BEDROOM_NIGHT_STAND: 'Szafka nocna',
+
+      KITCHEN_TABLE: 'Stół kuchenny',
+      KITCHEN_CHAIR: 'Krzesło kuchenne',
+      KITCHEN_SINK: 'Zlew kuchenny',
+      KITCHEN_CABINET: 'Szafka kuchenna',
+      KITCHEN_BAR_STOOL: 'Hoker',
+
+      BATHROOM_SINK_CABINET: 'Szafka pod umywalkę',
+      BATHROOM_BATH: 'Wanna',
+      BATHROOM_STORAGE_CABINET: 'Szafka łazienkowa',
+      BATHROOM_SHELF: 'Półka łazienkowa',
+      BATHROOM_LAUNDRY_BASKET: 'Kosz na pranie',
+
+      OFFICE_DESK: 'Biurko',
+      OFFICE_CHAIR: 'Fotel biurowy',
+      OFFICE_BOOKCASE: 'Regał biurowy',
+      OFFICE_FILE_CABINET: 'Szafka na dokumenty',
+
+      HALLWAY_SHOE_CABINET: 'Szafka na buty',
+      HALLWAY_COAT_RACK: 'Wieszak',
+      HALLWAY_BENCH: 'Ławka',
+      HALLWAY_MIRROR: 'Lustro',
+
+      TELEVISION: 'Telewizor',
+      SOUND_SYSTEM: 'System audio',
+      HOME_THEATER: 'Kino domowe',
+      MEDIA_PLAYER: 'Odtwarzacz multimedialny',
+      GAME_CONSOLE: 'Konsola do gier',
+
+      REFRIGERATOR: 'Lodówka',
+      DISHWASHER: 'Zmywarka',
+      WASHING_MACHINE: 'Pralka',
+      DRYER: 'Suszarka',
+      OVEN: 'Piekarnik',
+      MICROWAVE: 'Mikrofalówka',
+      COFFEE_MACHINE: 'Ekspres do kawy',
+      KETTLE: 'Czajnik',
+      TOASTER: 'Toster',
+      BLENDER: 'Blender',
+      VACUUM_CLEANER: 'Odkurzacz',
+      IRON: 'Żelazko',
+      AIR_PURIFIER: 'Oczyszczacz powietrza'
+    },
+    en: {
+      LIVING_ROOM_SOFA: 'Living room sofa',
+      LIVING_ROOM_COFFEE_TABLE: 'Coffee table',
+      LIVING_ROOM_BOOKCASE: 'Living room bookcase',
+      LIVING_ROOM_ARMCHAIR: 'Living room armchair',
+
+      BEDROOM_BED: 'Bed',
+      BEDROOM_WARDROBE: 'Wardrobe',
+      BEDROOM_CHEST_OF_DRAWERS: 'Chest of drawers',
+      BEDROOM_NIGHT_STAND: 'Nightstand',
+
+      KITCHEN_TABLE: 'Kitchen table',
+      KITCHEN_CHAIR: 'Kitchen chair',
+      KITCHEN_SINK: 'Kitchen sink',
+      KITCHEN_CABINET: 'Kitchen cabinet',
+      KITCHEN_BAR_STOOL: 'Bar stool',
+
+      BATHROOM_SINK_CABINET: 'Sink cabinet',
+      BATHROOM_BATH: 'Bathtub',
+      BATHROOM_STORAGE_CABINET: 'Bathroom cabinet',
+      BATHROOM_SHELF: 'Bathroom shelf',
+      BATHROOM_LAUNDRY_BASKET: 'Laundry basket',
+
+      OFFICE_DESK: 'Desk',
+      OFFICE_CHAIR: 'Office chair',
+      OFFICE_BOOKCASE: 'Office bookcase',
+      OFFICE_FILE_CABINET: 'File cabinet',
+
+      HALLWAY_SHOE_CABINET: 'Shoe cabinet',
+      HALLWAY_COAT_RACK: 'Coat rack',
+      HALLWAY_BENCH: 'Bench',
+      HALLWAY_MIRROR: 'Mirror',
+
+      TELEVISION: 'Television',
+      SOUND_SYSTEM: 'Sound system',
+      HOME_THEATER: 'Home theater',
+      MEDIA_PLAYER: 'Media player',
+      GAME_CONSOLE: 'Game console',
+
+      REFRIGERATOR: 'Refrigerator',
+      DISHWASHER: 'Dishwasher',
+      WASHING_MACHINE: 'Washing machine',
+      DRYER: 'Dryer',
+      OVEN: 'Oven',
+      MICROWAVE: 'Microwave',
+      COFFEE_MACHINE: 'Coffee machine',
+      KETTLE: 'Kettle',
+      TOASTER: 'Toaster',
+      BLENDER: 'Blender',
+      VACUUM_CLEANER: 'Vacuum cleaner',
+      IRON: 'Iron',
+      AIR_PURIFIER: 'Air purifier'
     }
   };
 
@@ -271,7 +540,7 @@ export class LanguageService {
 
     'Pojemna lodówka do nowoczesnej kuchni.': 'Spacious refrigerator for a modern kitchen.',
     'Zmywarka do codziennego użytku w domu.': 'Dishwasher for everyday home use.',
-    'Automatyczna pralka do mieszkania.': 'Automatic washing machine for home and apartment use.',
+    'Automatyczna pralka do domu i mieszkania.': 'Automatic washing machine for home and apartment use.',
     'Suszarka bębnowa oszczędzająca czas i miejsce.': 'Tumble dryer that saves time and space.',
     'Piekarnik do pieczenia i przygotowywania potraw.': 'Oven for baking and preparing meals.',
     'Kuchenka mikrofalowa do szybkiego podgrzewania dań.': 'Microwave oven for quickly heating meals.',
@@ -323,8 +592,23 @@ export class LanguageService {
 
     return this.categoryTranslations[this.currentLanguage][name] ?? name;
   }
+  productTypeName(productType: string): string {
+    const savedLanguage = localStorage.getItem(this.storageKey);
+
+    if (savedLanguage === 'pl' || savedLanguage === 'en') {
+      this.currentLanguage = savedLanguage;
+    }
+
+    return this.productTypeTranslations[this.currentLanguage][productType] ?? productType;
+  }
 
   productName(name: string): string {
+    const savedLanguage = localStorage.getItem(this.storageKey);
+
+    if (savedLanguage === 'pl' || savedLanguage === 'en') {
+      this.currentLanguage = savedLanguage;
+    }
+
     if (this.currentLanguage === 'pl') {
       return name;
     }
@@ -333,6 +617,12 @@ export class LanguageService {
   }
 
   productDescription(description: string | null | undefined): string {
+    const savedLanguage = localStorage.getItem(this.storageKey);
+
+    if (savedLanguage === 'pl' || savedLanguage === 'en') {
+      this.currentLanguage = savedLanguage;
+    }
+
     if (!description) {
       return '';
     }

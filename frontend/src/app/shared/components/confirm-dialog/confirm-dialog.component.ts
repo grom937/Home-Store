@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
+import { LanguageService } from '../../../core/services/language.service';
+
 @Component({
   selector: 'app-confirm-dialog',
   standalone: true,
@@ -10,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
     <div class="confirm-dialog">
       <div class="icon">!</div>
 
-      <h2 class="title">Potwierdzenie usunięcia</h2>
+      <h2 class="title">{{ languageService.t('confirmDeleteTitle') }}</h2>
 
       <p class="message">
         {{ data.message }}
@@ -18,11 +20,11 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 
       <div class="actions">
         <button type="button" class="cancel-button" (click)="close(false)">
-          Anuluj
+          {{ languageService.t('cancel') }}
         </button>
 
         <button type="button" class="delete-button" (click)="close(true)">
-          Usuń
+          {{ languageService.t('delete') }}
         </button>
       </div>
     </div>
@@ -104,7 +106,8 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 export class ConfirmDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { message: string },
-    private dialogRef: MatDialogRef<ConfirmDialogComponent>
+    private dialogRef: MatDialogRef<ConfirmDialogComponent>,
+    public languageService: LanguageService
   ) {}
 
   close(result: boolean): void {

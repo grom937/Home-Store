@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../../core/services/auth.service';
+import { LanguageService } from '../../../../core/services/language.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public languageService: LanguageService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -48,19 +50,21 @@ export class LoginComponent {
       email: formValue.email ?? '',
       password: formValue.password ?? ''
     }).subscribe({
-      next: (response) => {
-        this.successMessage = response.message || 'Zalogowano pomyślnie.';
+      next: () => {
+        this.successMessage = this.languageService.t('loginSuccess');
         this.isSubmitting = false;
 
-        if (response.role === 'ADMIN') {
+        const currentUser = this.authService.getCurrentUser();
+
+        if (currentUser?.role === 'ADMIN') {
           this.router.navigateByUrl('/admin/products');
           return;
         }
 
         this.router.navigateByUrl('/');
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.error?.message || 'Wystąpił błąd podczas logowania.';
+      error: (_error: HttpErrorResponse) => {
+        this.errorMessage = this.languageService.t('loginError');
         this.isSubmitting = false;
       }
     });

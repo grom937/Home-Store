@@ -1,24 +1,24 @@
-<a routerLink="/" class="top-back-link">← Strona główna</a>
+<a routerLink="/" class="top-back-link">← {{ languageService.t('backHome') }}</a>
 <section class="order-manage-page">
-  <h1>Zarządzanie zamówieniami</h1>
+  <h1>{{ languageService.t('adminOrders') }}</h1>
 
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
-  <p *ngIf="loading">Ładowanie zamówień...</p>
+  <p *ngIf="loading">{{ languageService.t('loadingOrders') }}</p>
 
   <div *ngIf="!loading && orders.length === 0" class="empty-state">
-    Brak zamówień do wyświetlenia.
+    {{ languageService.t('noOrdersAdmin') }}
   </div>
 
   <div class="orders-list" *ngIf="!loading && orders.length > 0">
     <article class="order-card" *ngFor="let order of orders">
-      <h2>Zamówienie {{ order.orderId }}</h2>
-      <p>Użytkownik: {{ order.userEmail }}</p>
-      <p>Data: {{ order.createdAt | date:'dd.MM.yyyy HH:mm' }}</p>
-      <p>Kwota: <strong>{{ order.totalAmount | currency:'PLN' }}</strong></p>
+      <h2>{{ languageService.t('order') }} {{ order.orderId }}</h2>
+      <p>{{ languageService.t('user') }}: {{ order.userEmail }}</p>
+      <p>{{ languageService.t('date') }}: {{ order.createdAt | date:'dd.MM.yyyy HH:mm' }}</p>
+      <p>{{ languageService.t('amount') }}: <strong>{{ order.totalAmount | currency:'PLN' }}</strong></p>
 
       <div class="status-row">
-        <label>Status:</label>
+        <label>{{ languageService.t('status') }}:</label>
 
         <select [(ngModel)]="order.status">
           <option *ngFor="let status of statuses" [ngValue]="status">
@@ -27,14 +27,14 @@
         </select>
 
         <button type="button" (click)="updateStatus(order.orderId, order.status)">
-          Zapisz status
+          {{ languageService.t('saveStatus') }}
         </button>
       </div>
 
       <div class="order-items">
         <div class="order-item" *ngFor="let item of order.items">
-          <span>{{ item.productName }}</span>
-          <span>{{ item.quantity }} szt.</span>
+          <span>{{ languageService.productName(item.productName) }}</span>
+          <span>{{ item.quantity }} {{ languageService.t('pieces') }}</span>
           <span>{{ item.lineTotal | currency:'PLN' }}</span>
         </div>
       </div>
